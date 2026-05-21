@@ -13,7 +13,7 @@ O objetivo do projeto é desenvolver uma aplicação desktop robusta, performát
 
 * **Linguagem Principal:** Kotlin
 * **Interface Gráfica (GUI):** JavaFX (Telas projetadas via Scene Builder / FXML)
-* **Banco de Dados:** SQLite (Embutido, garantindo persistência local simplificada e sem necessidade de servidores externos)
+* **Banco de Dados:** Arquivo .JSON
 
 ---
 
