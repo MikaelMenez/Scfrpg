@@ -1,0 +1,79 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Página-1" id="16McvfmwjRgyyt8Y7rVU">
+    <mxGraphModel dx="1246" dy="852" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="zl_dEBuYxvvvXjybTz6l-1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;div&gt;João Filipe&lt;/div&gt;&lt;div&gt;( Desenvolvedor )&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="10" y="210" as="geometry" />
+        </mxCell>
+        <mxCell id="zl_dEBuYxvvvXjybTz6l-2" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;div&gt;&lt;font style=&quot;font-size: 20px;&quot;&gt;Scrum com reuniões semanais&lt;/font&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="30" width="340" x="215" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="zl_dEBuYxvvvXjybTz6l-3" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;div&gt;&lt;font style=&quot;font-size: 20px;&quot;&gt;Backlog no github&lt;/font&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="30" width="190" x="290" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="zl_dEBuYxvvvXjybTz6l-4" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Kaio Renato&lt;br&gt;(Scrum master)" vertex="1">
+          <mxGeometry height="60" width="120" x="150" y="210" as="geometry" />
+        </mxCell>
+        <mxCell id="zl_dEBuYxvvvXjybTz6l-5" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Mikael Menezes&lt;/div&gt;&lt;div&gt;(P.O)&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="280" y="210" as="geometry" />
+        </mxCell>
+        <mxCell id="zl_dEBuYxvvvXjybTz6l-6" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;div&gt;Saulo Ramos&lt;/div&gt;&lt;div&gt;(Desenvolvedor)&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="420" y="210" as="geometry" />
+        </mxCell>
+        <mxCell id="zl_dEBuYxvvvXjybTz6l-7" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;div&gt;Álvaro Neto&lt;/div&gt;&lt;div&gt;(Desenvolvedor)&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="560" y="210" as="geometry" />
+        </mxCell>
+        <mxCell id="zl_dEBuYxvvvXjybTz6l-8" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;div&gt;Gustavo Afonso&lt;/div&gt;&lt;div&gt;(Desenvolvedor)&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="700" y="210" as="geometry" />
+        </mxCell>
+        <mxCell id="zl_dEBuYxvvvXjybTz6l-11" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="Requisitos funcionais" vertex="1">
+          <mxGeometry height="320" width="400" x="10" y="310" as="geometry" />
+        </mxCell>
+        <mxCell id="zl_dEBuYxvvvXjybTz6l-12" parent="zl_dEBuYxvvvXjybTz6l-11" style="text;strokeColor=default;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" value="Escolha de perfis de pessoas diferentes" vertex="1">
+          <mxGeometry height="30" width="400" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="zl_dEBuYxvvvXjybTz6l-13" parent="zl_dEBuYxvvvXjybTz6l-11" style="text;strokeColor=default;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" value="criação de personagem levando em consideração raças e classes diferentes" vertex="1">
+          <mxGeometry height="40" width="400" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="zl_dEBuYxvvvXjybTz6l-14" parent="zl_dEBuYxvvvXjybTz6l-11" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" value="&lt;div&gt;simulação de batalha&lt;/div&gt;" vertex="1">
+          <mxGeometry height="30" width="400" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="zl_dEBuYxvvvXjybTz6l-19" parent="zl_dEBuYxvvvXjybTz6l-11" style="text;strokeColor=default;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" value="Gerenciamento de personagem (CRUD)" vertex="1">
+          <mxGeometry height="30" width="400" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="zl_dEBuYxvvvXjybTz6l-21" parent="zl_dEBuYxvvvXjybTz6l-11" style="rounded=0;whiteSpace=wrap;html=1;" value="Gerenciamento de inventário e magias" vertex="1">
+          <mxGeometry height="40" width="400" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="zl_dEBuYxvvvXjybTz6l-22" parent="zl_dEBuYxvvvXjybTz6l-11" style="rounded=0;whiteSpace=wrap;html=1;" value="Interface amigável e interativa" vertex="1">
+          <mxGeometry height="40" width="400" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="zl_dEBuYxvvvXjybTz6l-23" parent="zl_dEBuYxvvvXjybTz6l-11" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;progressão de níveis nos personagens&lt;/div&gt;" vertex="1">
+          <mxGeometry height="40" width="400" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="zl_dEBuYxvvvXjybTz6l-24" parent="zl_dEBuYxvvvXjybTz6l-11" style="rounded=0;whiteSpace=wrap;html=1;" value="persistência de dados" vertex="1">
+          <mxGeometry height="40" width="400" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="zl_dEBuYxvvvXjybTz6l-15" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="Requisito de sistemas" vertex="1">
+          <mxGeometry height="120" width="400" x="414" y="310" as="geometry" />
+        </mxCell>
+        <mxCell id="zl_dEBuYxvvvXjybTz6l-16" parent="zl_dEBuYxvvvXjybTz6l-15" style="text;strokeColor=default;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" value="Escrito em kotlin" vertex="1">
+          <mxGeometry height="30" width="400" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="zl_dEBuYxvvvXjybTz6l-17" parent="zl_dEBuYxvvvXjybTz6l-15" style="text;strokeColor=default;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" value="persistência de dados utilizando json" vertex="1">
+          <mxGeometry height="30" width="400" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="zl_dEBuYxvvvXjybTz6l-18" parent="zl_dEBuYxvvvXjybTz6l-15" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" value="interface utilizando javafx" vertex="1">
+          <mxGeometry height="30" width="400" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="zl_dEBuYxvvvXjybTz6l-26" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="Requisitos não funcionais" vertex="1">
+          <mxGeometry height="80" width="390" x="420" y="450" as="geometry" />
+        </mxCell>
+        <mxCell id="zl_dEBuYxvvvXjybTz6l-27" parent="zl_dEBuYxvvvXjybTz6l-26" style="text;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" value="&lt;div align=&quot;center&quot;&gt;&lt;br&gt;&lt;/div&gt;&lt;div align=&quot;center&quot;&gt;multiplataforma&lt;/div&gt;" vertex="1">
+          <mxGeometry height="50" width="390" y="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
