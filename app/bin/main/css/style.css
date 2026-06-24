@@ -2,7 +2,7 @@
    1. TELA INICIAL (SEU CÓDIGO ORIGINAL - MANTIDO INTACTO)
    ======================================================== */
 .raiz-menu {
-    -fx-background-image: url('tela_inicial_background.png');
+    -fx-background-image: url('../imagens/tela_inicial_background.png');
     -fx-background-size: 100% 100%; 
     -fx-background-position: center;
 }
