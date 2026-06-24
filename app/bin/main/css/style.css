@@ -1,8 +1,12 @@
+/* ========================================================
+   1. TELA INICIAL (SEU CÓDIGO ORIGINAL - MANTIDO INTACTO)
+   ======================================================== */
 .raiz-menu {
     -fx-background-image: url('tela_inicial_background.png');
-    -fx-background-size: 100% 100%; /* Aqui tá o segredo: faz a imagem esticar/encolher junto com o painel */
+    -fx-background-size: 100% 100%; 
     -fx-background-position: center;
 }
+
 .botao-iniciar {
     -fx-background-color: #13D420;
     -fx-text-fill: rgb(0, 0, 0);
@@ -16,3 +20,101 @@
 .botao-iniciar:hover {
     -fx-background-color: #1d4ed8;
 }   
+
+
+/* ========================================================
+   2. TELA DE ESCOLHA (ESTILO NETFLIX COM ALTO CONTRASTE)
+   ======================================================== */
+
+/* Container do personagem e do botão de "+" (VBox) */
+.container-personagem {
+    -fx-cursor: hand;
+}
+
+/* Quando o mouse passa por cima da caixinha do personagem ou do "+" */
+.container-personagem:hover {
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
+}
+
+/* Nome do personagem (Alterado para ROXO vibrante) */
+.texto-perfil {
+    -fx-text-fill: #A855F7; /* Roxo estilo neon/vibrante */
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-font-family: 'Arial', sans-serif;
+}
+
+/* O quadrado escuro (Adicionado travas extras de tamanho) */
+.avatar-numero {
+    -fx-background-color: #212529; 
+    -fx-background-radius: 8px;
+    -fx-min-width: 150px;
+    -fx-min-height: 150px;
+    -fx-max-width: 150px;
+    -fx-max-height: 150px;
+    -fx-pref-width: 150px;
+    -fx-pref-height: 150px;
+    -fx-alignment: center;
+    
+    -fx-border-color: transparent;
+    -fx-border-width: 3px;
+    -fx-border-radius: 8px;
+}
+
+/* O número gigante dentro do quadrado (Garantido BRANCO) */
+.numero-perfil {
+    -fx-text-fill: #FFFFFF; /* Branco puro */
+    -fx-font-size: 75px;
+    -fx-font-weight: bold;
+    -fx-font-family: 'Arial Black', sans-serif;
+}
+
+/* Moldura específica para o quadrado cinza do botão "+" */
+.quadrado-mais {
+    -fx-border-color: transparent;
+    -fx-border-width: 3px;
+    -fx-border-radius: 4px;
+}
+
+/* --- EFEITO DE ACENDER A BORDA (HOVER) --- */
+/* Acende a borda branca tanto no quadrado do número quanto no do "+" */
+.container-personagem:hover .avatar-numero,
+.container-personagem:hover .quadrado-mais {
+    -fx-border-color: #FFFFFF; 
+}
+
+
+/* ========================================================
+   3. POPUP DE CRIAÇÃO (MANTIDO PARA OS BOTÕES DO OVERLAY)
+   ======================================================== */
+
+/* Botão Confirmar (Vermelho Netflix) */
+.botao-netflix-vermelho {
+    -fx-background-color: #E50914;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-background-radius: 2px;
+    -fx-cursor: hand;
+    -fx-padding: 8px 20px;
+}
+.botao-netflix-vermelho:hover {
+    -fx-background-color: #C40812;
+}
+
+/* Botão Cancelar (Cinza com borda) */
+.botao-netflix-cinza {
+    -fx-background-color: transparent;
+    -fx-text-fill: #808080;
+    -fx-border-color: #808080;
+    -fx-border-width: 1px;
+    -fx-border-radius: 2px;
+    -fx-font-size: 14px;
+    -fx-cursor: hand;
+    -fx-padding: 8px 20px;
+}
+.botao-netflix-cinza:hover {
+    -fx-text-fill: white;
+    -fx-border-color: white;
+}
