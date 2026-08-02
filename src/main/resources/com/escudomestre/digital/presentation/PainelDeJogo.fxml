@@ -10,39 +10,48 @@
 <VBox fx:controller="com.escudomestre.digital.presentation.PainelDeJogoController"
       xmlns:fx="http://javafx.com/fxml"
       alignment="TOP_LEFT"
-      spacing="12"
+      spacing="16"
       prefWidth="1366.0"
       prefHeight="768.0">
-    <Label text="Painel de Jogo e Simulador" styleClass="titulo-painel"/>
-    <HBox spacing="12" VBox.vgrow="ALWAYS">
+    <HBox alignment="CENTER_LEFT" spacing="16">
+        <Button text="← Voltar" styleClass="botao botao-secundario" onAction="#voltar"/>
+        <VBox spacing="2" HBox.hgrow="ALWAYS">
+            <Label text="Painel de Jogo e Simulador" styleClass="titulo-pagina"/>
+            <Label text="Ações de mesa: Rolar Ataque (F5) · Rolar Dano (F6) · Aplicar Dano (F7)"
+                   styleClass="subtitulo"/>
+        </VBox>
+    </HBox>
+    <HBox spacing="16" VBox.vgrow="ALWAYS">
         <ListView fx:id="listaFichas"
+                  styleClass="lista-fichas"
                   HBox.hgrow="ALWAYS"
                   VBox.vgrow="ALWAYS"
-                  minWidth="420.0"/>
-        <VBox spacing="12"
+                  minWidth="460.0"/>
+        <VBox spacing="16"
               HBox.hgrow="ALWAYS"
               VBox.vgrow="ALWAYS"
-              minWidth="480.0">
-            <HBox spacing="8">
-                <Label text="Personagem:"/>
-                <TextField fx:id="campoNome" editable="false" HBox.hgrow="ALWAYS"/>
+              minWidth="480.0"
+              styleClass="card">
+            <HBox spacing="8" alignment="CENTER_LEFT">
+                <Label text="Personagem:" styleClass="rotulo" prefWidth="130"/>
+                <TextField fx:id="campoNome" editable="false" styleClass="campo" HBox.hgrow="ALWAYS"/>
+            </HBox>
+            <HBox spacing="8" alignment="CENTER_LEFT">
+                <Label text="PV atual:" styleClass="rotulo" prefWidth="130"/>
+                <TextField fx:id="campoPv" editable="false" styleClass="campo" HBox.hgrow="ALWAYS"/>
+            </HBox>
+            <HBox spacing="8" alignment="CENTER_LEFT">
+                <Label text="Valor do dano:" styleClass="rotulo" prefWidth="130"/>
+                <TextField fx:id="campoValorDano" text="1" styleClass="campo" HBox.hgrow="ALWAYS"/>
+            </HBox>
+            <HBox spacing="8" alignment="CENTER_LEFT">
+                <Label text="Resultado da rolagem:" styleClass="rotulo" prefWidth="130"/>
+                <TextField fx:id="campoResultadoRolagem" editable="false" styleClass="campo" HBox.hgrow="ALWAYS"/>
             </HBox>
             <HBox spacing="8">
-                <Label text="PV atual:"/>
-                <TextField fx:id="campoPv" editable="false" HBox.hgrow="ALWAYS"/>
-            </HBox>
-            <HBox spacing="8">
-                <Label text="Valor do dano:"/>
-                <TextField fx:id="campoValorDano" text="1" HBox.hgrow="ALWAYS"/>
-            </HBox>
-            <HBox spacing="8">
-                <Label text="Resultado da rolagem:"/>
-                <TextField fx:id="campoResultadoRolagem" editable="false" HBox.hgrow="ALWAYS"/>
-            </HBox>
-            <HBox spacing="8">
-                <Button text="Rolar Ataque (F5)" onAction="#rolarAtaque" HBox.hgrow="ALWAYS"/>
-                <Button text="Rolar Dano (F6)" onAction="#rolarDano" HBox.hgrow="ALWAYS"/>
-                <Button text="Aplicar Dano (F7)" onAction="#aplicarDano" HBox.hgrow="ALWAYS"/>
+                <Button text="Rolar Ataque (F5)" styleClass="botao botao-primario" onAction="#rolarAtaque" HBox.hgrow="ALWAYS"/>
+                <Button text="Rolar Dano (F6)" styleClass="botao botao-primario" onAction="#rolarDano" HBox.hgrow="ALWAYS"/>
+                <Button text="Aplicar Dano (F7)" styleClass="botao botao-perigo" onAction="#aplicarDano" HBox.hgrow="ALWAYS"/>
             </HBox>
         </VBox>
     </HBox>

@@ -9,8 +9,12 @@ import javafx.collections.FXCollections
 import javafx.fxml.FXML
 import javafx.fxml.Initializable
 import javafx.scene.Scene
+import javafx.scene.control.ListCell
 import javafx.scene.control.ListView
 import javafx.scene.control.TextField
+import javafx.scene.control.Label
+import javafx.scene.layout.HBox
+import javafx.scene.layout.Priority
 import javafx.scene.input.KeyCode
 import javafx.scene.input.KeyCodeCombination
 import javafx.scene.input.KeyCombination
@@ -41,6 +45,7 @@ class PainelDeJogoController : Initializable, ObservadorDeMudanca {
     @FXML
     private lateinit var campoResultadoRolagem: TextField
 
+    private lateinit var app: MainApp
     private lateinit var simulador: SimuladorDeCombate
     private lateinit var personagemRepository: PersonagemRepository
 
@@ -51,18 +56,39 @@ class PainelDeJogoController : Initializable, ObservadorDeMudanca {
 
     override fun initialize(location: URL?, resources: ResourceBundle?) {
         configurarAtalhosPadrao()
+        listaFichas.cellFactory = javafx.util.Callback { ListCellFicha() }
         listaFichas.selectionModel.selectedItemProperty().addListener { _, _, selecionado ->
             exibirPersonagem(selecionado)
         }
     }
 
-    /** Liga o controlador ao simulador e ao repositório, e carrega as fichas (RU01). */
-    fun inicializar(simulador: SimuladorDeCombate, personagemRepository: PersonagemRepository) {
+    /** Liga o controlador ao aplicativo, simulador e repositório (RU01). */
+    fun inicializar(
+        app: MainApp,
+        simulador: SimuladorDeCombate,
+        personagemRepository: PersonagemRepository,
+    ) {
+        this.app = app
         this.simulador = simulador
         this.personagemRepository = personagemRepository
         listaFichas.items = fichas
         simulador.registrarObservador(this)
         carregarFichas()
+    }
+
+    /** Define a ficha atualmente em destaque no painel. */
+    fun selecionar(personagem: Personagem) {
+        val indice = fichas.indexOfFirst { it.id == personagem.id }
+        if (indice >= 0) {
+            listaFichas.selectionModel.select(indice)
+            listaFichas.scrollTo(indice)
+        }
+    }
+
+    /** Retorna à tela de seleção de fichas. */
+    fun voltar() {
+        simulador.removerObservador(this)
+        app.mostrarSelecao()
     }
 
     fun rolarAtaque() {
@@ -127,5 +153,26 @@ class PainelDeJogoController : Initializable, ObservadorDeMudanca {
 
     private fun carregarFichas() {
         fichas.setAll(personagemRepository.listar())
+    }
+
+    /** Célula de ficha no painel: nome, raça/classe, nível e barra de PV. */
+    private class ListCellFicha : ListCell<Personagem>() {
+        override fun updateItem(personagem: Personagem?, vazio: Boolean) {
+            super.updateItem(personagem, vazio)
+            if (vazio || personagem == null) {
+                text = null
+                graphic = null
+                return
+            }
+            val nome = Label(personagem.nome).apply { styleClass += "titulo-card" }
+            val detalhes = Label("${personagem.raca} · ${personagem.classe} · Nível ${personagem.nivel}")
+                .apply { styleClass += "texto-mutado" }
+            val pv = Label("PV ${personagem.pontosDeVidaAtual}/${personagem.pontosDeVidaMaximo}")
+                .apply { styleClass += "rotulo" }
+            val caixaTexto = javafx.scene.layout.VBox(4.0, nome, detalhes, pv)
+            val estado = Label(personagem.estado.name.replace("_", " ")).apply { styleClass += "badge" }
+            graphic = HBox(12.0, caixaTexto, estado)
+            HBox.setHgrow(caixaTexto, Priority.ALWAYS)
+        }
     }
 }

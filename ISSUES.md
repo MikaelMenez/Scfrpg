@@ -93,3 +93,20 @@ Cada issue referencia os requisitos e artefatos do documento que deve implementa
 - Atalhos de teclado configuráveis para rolar ataque, rolar dano e aplicar dano (RNF05).
 
 **Requisitos:** RU01 · RNF04 · RNF05 · §6.6
+
+---
+
+## #7 — Telas de seleção e criação de fichas + folha de estilo (visual Tailwind)
+
+**Tipo:** enhancement · **Prioridade:** alta
+
+**Corpo:** Completar o fluxo de RU01 na interface: adicionar a tela de **seleção de fichas** (cards dos personagens persistidos, com estado vazio e atalho para criar) e a tela de **criação de ficha** (formulário com validação dos campos obrigatórios e numéricos, AC 1.3), além da navegação entre Seleção → Criação → Painel de Jogo. Aplicar folha de estilo com visual inspirado no design system Tailwind CSS (paleta slate/indigo/emerald/rose, cards arredondados, sombras e estados de hover) em todas as telas e adicionar `cellFactory` na lista de fichas do painel.
+
+**Critérios de aceite:**
+- Tela de seleção lista fichas persistidas como cards; com estado vazio, apresenta orientação para criar.
+- Tela de criação valida obrigatórios e numéricos (AC 1.3) e persiste a ficha ao salvar.
+- Navegação fluida: Seleção → Criação → Painel de Jogo (com opção de voltar à seleção).
+- Visual da interface consistente com o design system Tailwind.
+- Lista do painel exibe ficha estruturada (nome, raça/classe, nível, PV, estado) via `cellFactory`.
+
+**Requisitos:** RU01 · AC 1.3 · §6.6
