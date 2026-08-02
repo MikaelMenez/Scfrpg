@@ -9,7 +9,7 @@ import java.util.UUID
 data class Magia(
     val id: String = UUID.randomUUID().toString(),
     val nome: String,
-    val nivel: Int,
+    var nivel: Int,
     var preparada: Boolean = false,
     var slotGasto: Boolean = false,
 )

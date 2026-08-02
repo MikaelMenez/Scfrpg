@@ -9,6 +9,6 @@ import java.util.UUID
 data class Item(
     val id: String = UUID.randomUUID().toString(),
     val nome: String,
-    val peso: Double,
-    val quantidade: Int,
+    var peso: Double,
+    var quantidade: Int,
 )

@@ -17,7 +17,7 @@ class Personagem(
     val classe: String,
     var nivel: Int = 1,
     var pontosDeVidaAtual: Int,
-    val pontosDeVidaMaximo: Int,
+    var pontosDeVidaMaximo: Int,
     var classeArmadura: Int = 10,
     var estado: EstadoCombate = EstadoCombate.AGUARDANDO_INICIATIVA,
 ) {
