@@ -110,3 +110,20 @@ Cada issue referencia os requisitos e artefatos do documento que deve implementa
 - Lista do painel exibe ficha estruturada (nome, raça/classe, nível, PV, estado) via `cellFactory`.
 
 **Requisitos:** RU01 · AC 1.3 · §6.6
+
+---
+
+## #8 — Regras D&D 5e: atributos, raças/classes (dropdowns), rolagem de atributos e combate
+
+**Tipo:** enhancement · **Prioridade:** alta
+
+**Corpo:** Digitalizar fichas D&D 5e conforme as regras do SRD: catálogos de domínio para os seis `Atributo`, `Raca` (com bônus de habilidade), `ClasseDePersonagem` (dado de vida, proficiências), `Arma` e `Armadura`. Implementar o `RoladorDeAtributos` (rolar 4d6 descartando o menor, array fixo 15/14/13/12/10/8 e compra de pontos de 27 pts) e o `ConstrutorDeFicha` (PV = dado de vida + CON, CA = armadura + Destreza + escudo, bônus de ataque = proficiência + atributo). Atualizar o `SimuladorDeCombate` para as regras de combate 5e (d20 + bônus vs CA, natural 20 crítico, natural 1 falha, dano por arma). Na interface, raça e classe viram listas suspensas e os atributos podem ser rolados/distribuídos.
+
+**Critérios de aceite:**
+- Atributos gerados por rolagem (4d6 descartar menor), array fixo ou compra de pontos, conforme as regras 5e.
+- Raça e classe selecionáveis por dropdown, com bônus raciais e dado de vida aplicados automaticamente.
+- PV, CA, bônus de proficiência e bônus de ataque calculados a partir dos atributos/equipamento.
+- Combate usa d20 + bônus vs. CA; natural 20 acerta (crítico) e natural 1 erra.
+- Tela de criação exibe resumo da ficha (PV, CA, ataque, proficiência, bônus racial) antes de salvar.
+
+**Requisitos:** RU01 · RU02 · §7.2 · SRD 5e

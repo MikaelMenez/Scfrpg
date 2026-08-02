@@ -20,10 +20,13 @@ enum class Vantagem {
  * @param resultado valor final exibido (dado(s) + modificadores).
  * @param dados valores individuais sorteados pelo PRNG antes dos modificadores,
  *              1 valor para rolagem simples e 2 para vantagem/desvantagem.
+ * @param dadoBruto valor do dado antes de qualquer modificador (d20 natural),
+ *              usado para detectar críticos e falhas críticas nas regras do SRD 5e.
  */
 data class ResultadoRolagem(
     val resultado: Int,
     val dados: List<Int>,
+    val dadoBruto: Int = 0,
 )
 
 /**
@@ -49,17 +52,25 @@ class MotorDeRegras(private val dadoVirtual: DadoVirtual = DadoVirtual()) {
         vantagem: Vantagem,
     ): ResultadoRolagem {
         if (vantagem == Vantagem.NENHUMA) {
-            val resultado = dadoVirtual.rolar(faces, modificador)
-            return ResultadoRolagem(resultado = resultado, dados = listOf(resultado))
+            val bruto = dadoVirtual.rolar(faces)
+            return ResultadoRolagem(
+                resultado = bruto + modificador,
+                dados = listOf(bruto + modificador),
+                dadoBruto = bruto,
+            )
         }
 
-        val primeira = dadoVirtual.rolar(faces, modificador)
-        val segunda = dadoVirtual.rolar(faces, modificador)
-        val resultado = when (vantagem) {
+        val primeira = dadoVirtual.rolar(faces)
+        val segunda = dadoVirtual.rolar(faces)
+        val bruto = when (vantagem) {
             Vantagem.VANTAGEM -> maxOf(primeira, segunda)
             Vantagem.DESVANTAGEM -> minOf(primeira, segunda)
             Vantagem.NENHUMA -> error("caso tratado acima")
         }
-        return ResultadoRolagem(resultado = resultado, dados = listOf(primeira, segunda))
+        return ResultadoRolagem(
+            resultado = bruto + modificador,
+            dados = listOf(primeira + modificador, segunda + modificador),
+            dadoBruto = bruto,
+        )
     }
 }

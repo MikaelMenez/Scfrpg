@@ -10,9 +10,20 @@ import com.escudomestre.digital.domain.service.ResultadoRolagem
 import com.escudomestre.digital.domain.service.Vantagem
 
 /**
+ * Resultado de um ataque processado com as regras do SRD 5e:
+ * d20 + bônus de ataque comparado à Classe de Armadura do alvo.
+ */
+data class ResultadoDeAtaque(
+    val acertou: Boolean,
+    val critico: Boolean,
+    val rolagem: ResultadoRolagem,
+    val dano: Int = 0,
+)
+
+/**
  * Camada de aplicação: coordena o fluxo de combate entre a interface e o motor de regras,
  * delegando a persistência ao repositório e notificando a interface via padrão Observer
- * (Seção 6.2, 6.5 e 7.3).
+ * (Seção 6.2, 6.5 e 7.3). As rolagens seguem as regras do SRD 5e.
  */
 class SimuladorDeCombate(
     private val motorDeRegras: MotorDeRegras = MotorDeRegras(),
@@ -45,7 +56,81 @@ class SimuladorDeCombate(
         return personagem
     }
 
-    /** Executa a rolagem de ataque somando o modificador de ataque do personagem (AC 2.1). */
+    /**
+     * Ataque 5e: rola `d20 + bônus de ataque` do [atacante] contra a Classe de Armadura
+     * do [alvo]. Natural 20 sempre acerta (crítico); natural 1 sempre erra. Em caso de
+     * acerto, rola o dano da arma equipada + modificador de atributo e aplica ao alvo.
+     */
+    fun atacar(
+        atacante: Personagem,
+        alvo: Personagem,
+        vantagem: Vantagem = Vantagem.NENHUMA,
+    ): ResultadoDeAtaque {
+        val rolagem = motorDeRegras.rolarAtaque(atacante.modificadorAtaque, vantagem)
+        registrarRolagem(atacante, TipoRolagem.ATACAR, rolagem.resultado)
+
+        val critico = rolagem.dadoBruto == 20
+        val falhaCritica = rolagem.dadoBruto == 1
+        val acertou = critico || (!falhaCritica && rolagem.resultado >= alvo.classeArmadura)
+
+        val dano = if (acertou) aplicarDanoDeArma(atacante, alvo, critico) else 0
+        return ResultadoDeAtaque(
+            acertou = acertou,
+            critico = critico,
+            rolagem = rolagem,
+            dano = dano,
+        )
+    }
+
+    /**
+     * Simula um ataque 5e contra um alvo com Classe de Armadura [caDoAlvo] sem aplicar
+     * dano real: útil para o painel exibir acerto/crítico e o dano potencial da arma.
+     */
+    fun testarAtaque(
+        atacante: Personagem,
+        caDoAlvo: Int,
+        vantagem: Vantagem = Vantagem.NENHUMA,
+    ): ResultadoDeAtaque {
+        val rolagem = motorDeRegras.rolarAtaque(atacante.modificadorAtaque, vantagem)
+        registrarRolagem(atacante, TipoRolagem.ATACAR, rolagem.resultado)
+
+        val critico = rolagem.dadoBruto == 20
+        val falhaCritica = rolagem.dadoBruto == 1
+        val acertou = critico || (!falhaCritica && rolagem.resultado >= caDoAlvo)
+
+        val dano = if (acertou) calcularDano(atacante, critico) else 0
+        return ResultadoDeAtaque(
+            acertou = acertou,
+            critico = critico,
+            rolagem = rolagem,
+            dano = dano,
+        )
+    }
+
+    private fun calcularDano(atacante: Personagem, critico: Boolean): Int {
+        val arma = atacante.armaEquipada
+        val modificador = atacante.modificadorDe(atacante.atributoDeCombate)
+        val rolagens = rolarDadosDeArma(arma)
+        var dano = rolagens.sum()
+        if (critico) {
+            dano += rolarDadosDeArma(arma).sum()
+        }
+        return dano + modificador
+    }
+
+    private fun rolarDadosDeArma(arma: com.escudomestre.digital.domain.model.Arma?): List<Int> {
+        if (arma == null) return listOf(1)
+        return List(arma.quantidadeDadosDano) { motorDeRegras.rolarDano(arma.facesDano).resultado }
+    }
+
+    private fun aplicarDanoDeArma(atacante: Personagem, alvo: Personagem, critico: Boolean): Int {
+        val dano = calcularDano(atacante, critico)
+        processarDano(alvo, dano)
+        registrarRolagem(atacante, TipoRolagem.DANO, dano)
+        return dano
+    }
+
+    /** Executa a rolagem de ataque somando o bônus de ataque do personagem (AC 2.1). */
     fun rolarAtaque(
         personagem: Personagem,
         vantagem: Vantagem = Vantagem.NENHUMA,

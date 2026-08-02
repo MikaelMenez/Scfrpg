@@ -1,5 +1,6 @@
 package com.escudomestre.digital.infrastructure.persistence
 
+import com.escudomestre.digital.FichasDeTeste
 import com.escudomestre.digital.domain.model.Item
 import com.escudomestre.digital.domain.model.Magia
 import com.escudomestre.digital.domain.model.Personagem
@@ -198,15 +199,7 @@ class RepositorioIntegracaoTest {
     }
 
     private fun personagem(nome: String = "Aragorn"): Personagem =
-        Personagem(
-            nome = nome,
-            raca = "Humano",
-            classe = "Guerreiro",
-            nivel = 3,
-            pontosDeVidaAtual = 30,
-            pontosDeVidaMaximo = 30,
-            classeArmadura = 16,
-        )
+        FichasDeTeste.guerreiro(nome = nome)
 
     private fun assertSamePersonagem(esperado: Personagem, atual: Personagem) {
         assertEquals(esperado.id, atual.id)
@@ -214,9 +207,11 @@ class RepositorioIntegracaoTest {
         assertEquals(esperado.raca, atual.raca)
         assertEquals(esperado.classe, atual.classe)
         assertEquals(esperado.nivel, atual.nivel)
+        assertEquals(esperado.atributos, atual.atributos)
         assertEquals(esperado.pontosDeVidaAtual, atual.pontosDeVidaAtual)
         assertEquals(esperado.pontosDeVidaMaximo, atual.pontosDeVidaMaximo)
-        assertEquals(esperado.classeArmadura, atual.classeArmadura)
-        assertEquals(esperado.modificadorAtaque, atual.modificadorAtaque)
+        assertEquals(esperado.armaEquipada, atual.armaEquipada)
+        assertEquals(esperado.armaduraEquipada, atual.armaduraEquipada)
+        assertEquals(esperado.escudoEquipado, atual.escudoEquipado)
     }
 }

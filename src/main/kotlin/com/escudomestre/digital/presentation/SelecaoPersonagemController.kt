@@ -48,7 +48,7 @@ class SelecaoPersonagemController : Initializable {
 
     private fun criarCard(personagem: Personagem): VBox {
         val nome = Label(personagem.nome).apply { styleClass += "titulo-card" }
-        val detalhes = Label("${personagem.raca} · ${personagem.classe}").apply { styleClass += "texto-mutado" }
+        val detalhes = Label("${personagem.raca.rotulo} · ${personagem.classe.rotulo}").apply { styleClass += "texto-mutado" }
         val badge = Label("Nível ${personagem.nivel}").apply { styleClass += "badge" }
 
         val pvBarra = ProgressBar(proporcaoPv(personagem)).apply {

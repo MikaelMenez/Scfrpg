@@ -1,5 +1,6 @@
 package com.escudomestre.digital.infrastructure.persistence
 
+import com.escudomestre.digital.domain.model.Atributo
 import com.escudomestre.digital.domain.model.Personagem
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.deleteWhere
@@ -19,13 +20,20 @@ class PersonagemDAO {
             PersonagensTable.insert {
                 it[id] = personagem.id
                 it[nome] = personagem.nome
-                it[raca] = personagem.raca
-                it[classe] = personagem.classe
+                it[raca] = personagem.raca.name
+                it[classe] = personagem.classe.name
                 it[nivel] = personagem.nivel
+                it[forca] = personagem.valorDe(Atributo.FORCA)
+                it[destreza] = personagem.valorDe(Atributo.DESTREZA)
+                it[constituicao] = personagem.valorDe(Atributo.CONSTITUICAO)
+                it[inteligencia] = personagem.valorDe(Atributo.INTELIGENCIA)
+                it[sabedoria] = personagem.valorDe(Atributo.SABEDORIA)
+                it[carisma] = personagem.valorDe(Atributo.CARISMA)
                 it[pontosVidaAtual] = personagem.pontosDeVidaAtual
                 it[pontosVidaMaximo] = personagem.pontosDeVidaMaximo
-                it[classeArmadura] = personagem.classeArmadura
-                it[modificadorAtaque] = personagem.modificadorAtaque
+                it[arma] = personagem.armaEquipada?.name
+                it[armadura] = personagem.armaduraEquipada.name
+                it[escudo] = personagem.escudoEquipado
             }
         }
     }
@@ -40,13 +48,20 @@ class PersonagemDAO {
         transaction {
             PersonagensTable.update({ PersonagensTable.id eq personagem.id }, null) {
                 it[nome] = personagem.nome
-                it[raca] = personagem.raca
-                it[classe] = personagem.classe
+                it[raca] = personagem.raca.name
+                it[classe] = personagem.classe.name
                 it[nivel] = personagem.nivel
+                it[forca] = personagem.valorDe(Atributo.FORCA)
+                it[destreza] = personagem.valorDe(Atributo.DESTREZA)
+                it[constituicao] = personagem.valorDe(Atributo.CONSTITUICAO)
+                it[inteligencia] = personagem.valorDe(Atributo.INTELIGENCIA)
+                it[sabedoria] = personagem.valorDe(Atributo.SABEDORIA)
+                it[carisma] = personagem.valorDe(Atributo.CARISMA)
                 it[pontosVidaAtual] = personagem.pontosDeVidaAtual
                 it[pontosVidaMaximo] = personagem.pontosDeVidaMaximo
-                it[classeArmadura] = personagem.classeArmadura
-                it[modificadorAtaque] = personagem.modificadorAtaque
+                it[arma] = personagem.armaEquipada?.name
+                it[armadura] = personagem.armaduraEquipada.name
+                it[escudo] = personagem.escudoEquipado
             }
         }
     }

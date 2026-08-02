@@ -2,6 +2,7 @@ package com.escudomestre.digital.presentation
 
 import com.escudomestre.digital.application.ObservadorDeMudanca
 import com.escudomestre.digital.application.SimuladorDeCombate
+import com.escudomestre.digital.domain.model.Atributo
 import com.escudomestre.digital.domain.model.Personagem
 import com.escudomestre.digital.domain.repository.PersonagemRepository
 import com.escudomestre.digital.domain.service.Vantagem
@@ -9,22 +10,22 @@ import javafx.collections.FXCollections
 import javafx.fxml.FXML
 import javafx.fxml.Initializable
 import javafx.scene.Scene
+import javafx.scene.control.Label
 import javafx.scene.control.ListCell
 import javafx.scene.control.ListView
 import javafx.scene.control.TextField
-import javafx.scene.control.Label
-import javafx.scene.layout.HBox
-import javafx.scene.layout.Priority
 import javafx.scene.input.KeyCode
 import javafx.scene.input.KeyCodeCombination
 import javafx.scene.input.KeyCombination
+import javafx.scene.layout.HBox
+import javafx.scene.layout.Priority
 import java.net.URL
 import java.util.ResourceBundle
 
 /**
- * Controlador do Painel de Jogo (Seção 6.6). Apresenta as fichas, coordena as ações
- * de mesa (rolar ataque, rolar dano, aplicar dano) com o SimuladorDeCombate e atua
- * como observador (Observer) das mudanças de estado (RNF02).
+ * Controlador do Painel de Jogo (Seção 6.6). Apresenta as fichas D&D 5e, coordena as
+ * ações de mesa (atacar contra CA, rolar dano, aplicar dano) com o SimuladorDeCombate
+ * e atua como observador (Observer) das mudanças de estado (RNF02).
  */
 class PainelDeJogoController : Initializable, ObservadorDeMudanca {
 
@@ -39,7 +40,27 @@ class PainelDeJogoController : Initializable, ObservadorDeMudanca {
     @FXML
     private lateinit var campoNome: TextField
     @FXML
+    private lateinit var campoRacaClasse: TextField
+    @FXML
     private lateinit var campoPv: TextField
+    @FXML
+    private lateinit var campoCa: TextField
+    @FXML
+    private lateinit var campoArma: TextField
+    @FXML
+    private lateinit var campoForca: Label
+    @FXML
+    private lateinit var campoDestreza: Label
+    @FXML
+    private lateinit var campoConstituicao: Label
+    @FXML
+    private lateinit var campoInteligencia: Label
+    @FXML
+    private lateinit var campoSabedoria: Label
+    @FXML
+    private lateinit var campoCarisma: Label
+    @FXML
+    private lateinit var campoCaAlvo: TextField
     @FXML
     private lateinit var campoValorDano: TextField
     @FXML
@@ -91,15 +112,24 @@ class PainelDeJogoController : Initializable, ObservadorDeMudanca {
         app.mostrarSelecao()
     }
 
-    fun rolarAtaque() {
+    /** Ataca contra a CA digitada usando as regras 5e (d20 + bônus vs CA). */
+    fun atacarAlvo() {
         val personagem = personagemSelecionado() ?: return
-        val resultado = simulador.rolarAtaque(personagem, Vantagem.NENHUMA)
-        campoResultadoRolagem.text = "Ataque: ${resultado.resultado}"
+        val caAlvo = campoCaAlvo.text.toIntOrNull() ?: return
+        val resultado = simulador.testarAtaque(personagem, caAlvo)
+        campoResultadoRolagem.text = when {
+            resultado.critico -> "CRÍTICO! d20 ${resultado.rolagem.dadoBruto} → dano ${resultado.dano}"
+            resultado.acertou -> "Acerto (d20 ${resultado.rolagem.resultado} ≥ CA $caAlvo) → dano ${resultado.dano}"
+            else -> "Erro (d20 ${resultado.rolagem.resultado} < CA $caAlvo)"
+        }
     }
 
     fun rolarDano() {
         val personagem = personagemSelecionado() ?: return
-        val resultado = simulador.rolarDano(personagem, faces = 8)
+        val arma = personagem.armaEquipada
+        val faces = arma?.facesDano ?: 6
+        val modificador = if (arma == null) 0 else personagem.modificadorDe(personagem.atributoDeCombate)
+        val resultado = simulador.rolarDano(personagem, faces = faces, modificador = modificador)
         campoResultadoRolagem.text = "Dano: ${resultado.resultado}"
     }
 
@@ -137,7 +167,7 @@ class PainelDeJogoController : Initializable, ObservadorDeMudanca {
 
     private fun executar(acao: AcaoDeMesa) {
         when (acao) {
-            AcaoDeMesa.ROLAR_ATAQUE -> rolarAtaque()
+            AcaoDeMesa.ROLAR_ATAQUE -> atacarAlvo()
             AcaoDeMesa.ROLAR_DANO -> rolarDano()
             AcaoDeMesa.APLICAR_DANO -> aplicarDano()
         }
@@ -148,8 +178,22 @@ class PainelDeJogoController : Initializable, ObservadorDeMudanca {
 
     private fun exibirPersonagem(personagem: Personagem?) {
         campoNome.text = personagem?.nome ?: ""
-        campoPv.text = personagem?.pontosDeVidaAtual?.toString() ?: ""
+        campoRacaClasse.text = personagem?.let { "${it.raca.rotulo} · ${it.classe.rotulo}" } ?: ""
+        campoPv.text = personagem?.let { "${it.pontosDeVidaAtual}/${it.pontosDeVidaMaximo}" } ?: ""
+        campoCa.text = personagem?.classeArmadura?.toString() ?: ""
+        campoArma.text = personagem?.armaEquipada?.rotulo ?: "Sem arma (desarmado 1)"
+        campoForca.text = personagem?.atributoLabel(Atributo.FORCA) ?: ""
+        campoDestreza.text = personagem?.atributoLabel(Atributo.DESTREZA) ?: ""
+        campoConstituicao.text = personagem?.atributoLabel(Atributo.CONSTITUICAO) ?: ""
+        campoInteligencia.text = personagem?.atributoLabel(Atributo.INTELIGENCIA) ?: ""
+        campoSabedoria.text = personagem?.atributoLabel(Atributo.SABEDORIA) ?: ""
+        campoCarisma.text = personagem?.atributoLabel(Atributo.CARISMA) ?: ""
     }
+
+    private fun Personagem.atributoLabel(atributo: Atributo): String =
+        "${valorDe(atributo)} (${formatoBonus(modificadorDe(atributo))})"
+
+    private fun formatoBonus(valor: Int): String = if (valor >= 0) "+$valor" else "$valor"
 
     private fun carregarFichas() {
         fichas.setAll(personagemRepository.listar())
@@ -165,9 +209,9 @@ class PainelDeJogoController : Initializable, ObservadorDeMudanca {
                 return
             }
             val nome = Label(personagem.nome).apply { styleClass += "titulo-card" }
-            val detalhes = Label("${personagem.raca} · ${personagem.classe} · Nível ${personagem.nivel}")
+            val detalhes = Label("${personagem.raca.rotulo} · ${personagem.classe.rotulo} · Nível ${personagem.nivel}")
                 .apply { styleClass += "texto-mutado" }
-            val pv = Label("PV ${personagem.pontosDeVidaAtual}/${personagem.pontosDeVidaMaximo}")
+            val pv = Label("PV ${personagem.pontosDeVidaAtual}/${personagem.pontosDeVidaMaximo} · CA ${personagem.classeArmadura}")
                 .apply { styleClass += "rotulo" }
             val caixaTexto = javafx.scene.layout.VBox(4.0, nome, detalhes, pv)
             val estado = Label(personagem.estado.name.replace("_", " ")).apply { styleClass += "badge" }

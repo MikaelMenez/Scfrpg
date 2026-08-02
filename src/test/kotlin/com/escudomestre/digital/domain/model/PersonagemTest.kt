@@ -1,5 +1,6 @@
 package com.escudomestre.digital.domain.model
 
+import com.escudomestre.digital.FichasDeTeste
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
@@ -7,15 +8,7 @@ import kotlin.test.assertFailsWith
 class PersonagemTest {
 
     private fun personagem(pvAtual: Int = 30, pvMax: Int = 30): Personagem =
-        Personagem(
-            nome = "Aragorn",
-            raca = "Humano",
-            classe = "Guerreiro",
-            nivel = 3,
-            pontosDeVidaAtual = pvAtual,
-            pontosDeVidaMaximo = pvMax,
-            classeArmadura = 16,
-        )
+        FichasDeTeste.guerreiro(pvAtual = pvAtual).also { it.pontosDeVidaMaximo = pvMax }
 
     @Test
     fun `aplicar dano reduz os pontos de vida atuais`() {

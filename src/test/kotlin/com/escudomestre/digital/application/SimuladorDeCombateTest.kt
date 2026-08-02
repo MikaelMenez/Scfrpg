@@ -1,5 +1,7 @@
 package com.escudomestre.digital.application
 
+import com.escudomestre.digital.FichasDeTeste
+import com.escudomestre.digital.domain.model.Armadura
 import com.escudomestre.digital.domain.model.EstadoCombate
 import com.escudomestre.digital.domain.model.Item
 import com.escudomestre.digital.domain.model.Magia
@@ -9,6 +11,7 @@ import com.escudomestre.digital.domain.repository.HistoricoRepository
 import com.escudomestre.digital.domain.repository.ItemRepository
 import com.escudomestre.digital.domain.repository.MagiaRepository
 import com.escudomestre.digital.domain.repository.PersonagemRepository
+import com.escudomestre.digital.domain.service.DadoVirtual
 import com.escudomestre.digital.domain.service.MotorDeRegras
 import com.escudomestre.digital.domain.service.Vantagem
 import com.escudomestre.digital.infrastructure.persistence.DatabaseFactory
@@ -58,17 +61,12 @@ class SimuladorDeCombateTest {
         relogio = relogio,
     )
 
-    private fun personagem(pvAtual: Int = 30, nome: String = "Aragorn"): Personagem =
-        Personagem(
-            nome = nome,
-            raca = "Humano",
-            classe = "Guerreiro",
-            nivel = 3,
-            pontosDeVidaAtual = pvAtual,
-            pontosDeVidaMaximo = 30,
-            classeArmadura = 16,
-            modificadorAtaque = 5,
-        )
+    private fun personagem(
+        pvAtual: Int = 30,
+        nome: String = "Aragorn",
+        armadura: Armadura = Armadura.COTA_DE_MALHA,
+    ): Personagem =
+        FichasDeTeste.guerreiro(pvAtual = pvAtual, nome = nome, armadura = armadura)
 
     @Test
     fun `aplicar dano atualiza PV persiste e notifica a interface (AC 2 3)`() {
@@ -219,6 +217,48 @@ class SimuladorDeCombateTest {
     }
 
     @Test
+    fun `ataque 5e acerta quando a rolada supera a CA do alvo e aplica dano`() {
+        val atacante = personagem().also { personagemRepository.criar(it) }
+        val alvo = personagem(nome = "Orc", pvAtual = 20, armadura = Armadura.SEM_ARMADURA)
+            .also { personagemRepository.criar(it) }
+        val motor = MotorDeRegras(DadoVirtualSequenciado(listOf(14, 0)))
+        val simulador = simulador(motorDeRegras = motor)
+
+        val resultado = simulador.atacar(atacante, alvo)
+
+        assertEquals(15, resultado.rolagem.dadoBruto)
+        assertTrue(resultado.acertou)
+        assertTrue(alvo.pontosDeVidaAtual < 20)
+    }
+
+    @Test
+    fun `ataque 5e natural 1 sempre erra mesmo com bonus alto`() {
+        val atacante = personagem().also { personagemRepository.criar(it) }
+        val alvo = personagem(nome = "Orc", pvAtual = 20).also { personagemRepository.criar(it) }
+        val motor = MotorDeRegras(DadoVirtualSequenciado(listOf(0)))
+        val simulador = simulador(motorDeRegras = motor)
+
+        val resultado = simulador.atacar(atacante, alvo)
+
+        assertEquals(1, resultado.rolagem.dadoBruto)
+        assertEquals(false, resultado.acertou)
+    }
+
+    @Test
+    fun `ataque 5e natural 20 e critico e rola dano dobrado`() {
+        val atacante = personagem().also { personagemRepository.criar(it) }
+        val alvo = personagem(nome = "Orc", pvAtual = 60).also { personagemRepository.criar(it) }
+        val motor = MotorDeRegras(DadoVirtualSequenciado(listOf(19, 0, 0)))
+        val simulador = simulador(motorDeRegras = motor)
+
+        val resultado = simulador.atacar(atacante, alvo)
+
+        assertTrue(resultado.critico)
+        assertTrue(resultado.acertou)
+        assertEquals(false, resultado.dano < atacante.modificadorDe(atacante.atributoDeCombate))
+    }
+
+    @Test
     fun `itens e magias sao persistidos e recuperados junto a ficha`() {
         val personagem = personagem().also { personagemRepository.criar(it) }
         val item = Item(nome = "Espada Longa", peso = 2.5, quantidade = 1)
@@ -228,5 +268,15 @@ class SimuladorDeCombateTest {
 
         assertEquals(listOf(item), itemRepository.listarPorPersonagem(personagem.id))
         assertEquals(listOf(magia), magiaRepository.listarPorPersonagem(personagem.id))
+    }
+}
+
+/** Dado virtual com sequência controlada de resultados (valores brutos antes do modificador). */
+private class DadoVirtualSequenciado(private val valores: List<Int>) : DadoVirtual() {
+    private var indice = 0
+
+    override fun rolar(faces: Int, modificador: Int): Int {
+        val bruto = valores[indice++ % valores.size] + 1
+        return bruto + modificador
     }
 }
