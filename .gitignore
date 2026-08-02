@@ -1,0 +1,11 @@
+.gradle/
+build/
+.idea/
+*.iml
+.DS_Store
+
+# Banco de dados local (RNF03)
+*.db
+*.db-journal
+*.db-shm
+*.db-wal
