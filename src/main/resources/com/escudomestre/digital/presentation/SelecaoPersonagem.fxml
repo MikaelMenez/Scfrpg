@@ -11,9 +11,11 @@
       xmlns:fx="http://javafx.com/fxml"
       alignment="TOP_LEFT"
       spacing="20"
+     
       prefWidth="1366.0"
       prefHeight="768.0">
-    <HBox alignment="CENTER_LEFT" spacing="16">
+    <HBox alignment="CENTER_LEFT" spacing="16" styleClass="header">
+        <Label text="⚔" styleClass="logo-marca"/>
         <VBox spacing="2" HBox.hgrow="ALWAYS">
             <Label text="O Escudo do Mestre Digital" styleClass="titulo-pagina"/>
             <Label text="Selecione uma ficha para conduzir na mesa" styleClass="subtitulo"/>
@@ -23,7 +25,7 @@
 
     <Label fx:id="estadoVazio"
            text="Nenhuma ficha criada ainda. Clique em &quot;+ Nova Ficha&quot; para começar."
-           styleClass="texto-mutado"
+           styleClass="texto-mutado card"
            managed="false"
            visible="false"/>
 

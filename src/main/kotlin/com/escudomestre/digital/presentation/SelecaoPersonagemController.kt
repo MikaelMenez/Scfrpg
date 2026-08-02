@@ -8,6 +8,7 @@ import javafx.scene.control.Button
 import javafx.scene.control.Label
 import javafx.scene.control.ProgressBar
 import javafx.scene.layout.FlowPane
+import javafx.scene.layout.HBox
 import javafx.scene.layout.VBox
 import java.net.URL
 import java.util.ResourceBundle
@@ -47,9 +48,17 @@ class SelecaoPersonagemController : Initializable {
     }
 
     private fun criarCard(personagem: Personagem): VBox {
+        val avatar = Label(personagem.nome.take(1).uppercase()).apply {
+            styleClass += "avatar-ficha"
+        }
         val nome = Label(personagem.nome).apply { styleClass += "titulo-card" }
-        val detalhes = Label("${personagem.raca.rotulo} · ${personagem.classe.rotulo}").apply { styleClass += "texto-mutado" }
-        val badge = Label("Nível ${personagem.nivel}").apply { styleClass += "badge" }
+        val detalhes = Label("${personagem.raca.rotulo} · ${personagem.classe.rotulo}")
+            .apply { styleClass += "texto-mutado" }
+        val cabecalho = HBox(12.0, avatar, VBox(2.0, nome, detalhes)).apply {
+            alignment = javafx.geometry.Pos.CENTER_LEFT
+        }
+
+        val badge = Label("Nível ${personagem.nivel}").apply { styleClass += "badge badge-ambar" }
 
         val pvBarra = ProgressBar(proporcaoPv(personagem)).apply {
             styleClass += "progresso-pv"
@@ -66,7 +75,7 @@ class SelecaoPersonagemController : Initializable {
             app.mostrarPainel(personagem)
         }
 
-        return VBox(10.0, nome, detalhes, badge, pvBarra, pvTexto, ca, abrir).apply {
+        return VBox(10.0, cabecalho, badge, pvBarra, pvTexto, ca, abrir).apply {
             styleClass += "card card-ficha"
             prefWidth = 260.0
             setOnMouseClicked { app.mostrarPainel(personagem) }

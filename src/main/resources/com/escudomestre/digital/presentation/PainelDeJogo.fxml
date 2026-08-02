@@ -13,10 +13,12 @@
       xmlns:fx="http://javafx.com/fxml"
       alignment="TOP_LEFT"
       spacing="16"
+     
       prefWidth="1366.0"
       prefHeight="768.0">
-    <HBox alignment="CENTER_LEFT" spacing="16">
+    <HBox alignment="CENTER_LEFT" spacing="16" styleClass="header">
         <Button text="← Voltar" styleClass="botao botao-secundario" onAction="#voltar"/>
+        <Label text="⚔" styleClass="logo-marca"/>
         <VBox spacing="2" HBox.hgrow="ALWAYS">
             <Label text="Painel de Jogo e Simulador" styleClass="titulo-pagina"/>
             <Label text="Ações de mesa: Rolar Ataque (F5) · Rolar Dano (F6) · Aplicar Dano (F7)"
@@ -59,33 +61,42 @@
                 </HBox>
             </VBox>
 
-            <VBox spacing="6">
+            <VBox spacing="8">
                 <Label text="Atributos" styleClass="titulo-card"/>
-                <GridPane hgap="12" vgap="4">
+                <GridPane hgap="8" vgap="8">
                     <columnConstraints>
-                        <ColumnConstraints minWidth="110"/>
-                        <ColumnConstraints minWidth="46"/>
-                        <ColumnConstraints minWidth="110"/>
-                        <ColumnConstraints minWidth="46"/>
-                        <ColumnConstraints minWidth="110"/>
-                        <ColumnConstraints minWidth="46"/>
+                        <ColumnConstraints hgrow="ALWAYS" minWidth="0"/>
+                        <ColumnConstraints hgrow="ALWAYS" minWidth="0"/>
+                        <ColumnConstraints hgrow="ALWAYS" minWidth="0"/>
                     </columnConstraints>
-                    <Label text="Força" styleClass="rotulo" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-                    <Label fx:id="campoForca" styleClass="texto-mutado" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
-                    <Label text="Destreza" styleClass="rotulo" GridPane.rowIndex="0" GridPane.columnIndex="2"/>
-                    <Label fx:id="campoDestreza" styleClass="texto-mutado" GridPane.rowIndex="0" GridPane.columnIndex="3"/>
-                    <Label text="Constituição" styleClass="rotulo" GridPane.rowIndex="0" GridPane.columnIndex="4"/>
-                    <Label fx:id="campoConstituicao" styleClass="texto-mutado" GridPane.rowIndex="0" GridPane.columnIndex="5"/>
-                    <Label text="Inteligência" styleClass="rotulo" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-                    <Label fx:id="campoInteligencia" styleClass="texto-mutado" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
-                    <Label text="Sabedoria" styleClass="rotulo" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
-                    <Label fx:id="campoSabedoria" styleClass="texto-mutado" GridPane.rowIndex="1" GridPane.columnIndex="3"/>
-                    <Label text="Carisma" styleClass="rotulo" GridPane.rowIndex="1" GridPane.columnIndex="4"/>
-                    <Label fx:id="campoCarisma" styleClass="texto-mutado" GridPane.rowIndex="1" GridPane.columnIndex="5"/>
+                    <VBox styleClass="stat-tile" GridPane.rowIndex="0" GridPane.columnIndex="0">
+                        <Label text="FOR" styleClass="stat-abreviacao"/>
+                        <Label fx:id="campoForca" styleClass="stat-valor"/>
+                    </VBox>
+                    <VBox styleClass="stat-tile" GridPane.rowIndex="0" GridPane.columnIndex="1">
+                        <Label text="DES" styleClass="stat-abreviacao"/>
+                        <Label fx:id="campoDestreza" styleClass="stat-valor"/>
+                    </VBox>
+                    <VBox styleClass="stat-tile" GridPane.rowIndex="0" GridPane.columnIndex="2">
+                        <Label text="CON" styleClass="stat-abreviacao"/>
+                        <Label fx:id="campoConstituicao" styleClass="stat-valor"/>
+                    </VBox>
+                    <VBox styleClass="stat-tile" GridPane.rowIndex="1" GridPane.columnIndex="0">
+                        <Label text="INT" styleClass="stat-abreviacao"/>
+                        <Label fx:id="campoInteligencia" styleClass="stat-valor"/>
+                    </VBox>
+                    <VBox styleClass="stat-tile" GridPane.rowIndex="1" GridPane.columnIndex="1">
+                        <Label text="SAB" styleClass="stat-abreviacao"/>
+                        <Label fx:id="campoSabedoria" styleClass="stat-valor"/>
+                    </VBox>
+                    <VBox styleClass="stat-tile" GridPane.rowIndex="1" GridPane.columnIndex="2">
+                        <Label text="CAR" styleClass="stat-abreviacao"/>
+                        <Label fx:id="campoCarisma" styleClass="stat-valor"/>
+                    </VBox>
                 </GridPane>
             </VBox>
 
-            <VBox spacing="6">
+            <VBox spacing="8">
                 <Label text="Ações de mesa" styleClass="titulo-card"/>
                 <HBox spacing="8" alignment="CENTER_LEFT">
                     <Label text="CA do alvo:" styleClass="rotulo" prefWidth="130"/>

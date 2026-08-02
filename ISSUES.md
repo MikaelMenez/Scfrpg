@@ -127,3 +127,20 @@ Cada issue referencia os requisitos e artefatos do documento que deve implementa
 - Tela de criação exibe resumo da ficha (PV, CA, ataque, proficiência, bônus racial) antes de salvar.
 
 **Requisitos:** RU01 · RU02 · §7.2 · SRD 5e
+
+---
+
+## #9 — Refinamento da interface gráfica (visual Dark Mode D&D)
+
+**Tipo:** enhancement · **Prioridade:** média
+
+**Corpo:** Refinar o visual da interface para um tema dark sofisticado de mesa de D&D sobre o design system Tailwind da issue #7. Substituir o gradiente de fundo por uma composição mais rica, adicionar cabeçalho com logotipo nas telas, padronizar todos os controles (ComboBox com popup estilizado, CheckBox, ScrollBar, campos com estados de foco), enriquecer os cards de seleção e as células da lista com avatar, badges de estado/derrota, tiles de estatísticas (FOR/DES/CON/INT/SAB/CAR) no painel e melhor hierarquia tipográfica.
+
+**Critérios de aceite:**
+- Controles nativos (ComboBox, CheckBox, ScrollBar) estilizados e consistentes com o tema.
+- Cards de seleção e células da lista com avatar, badges e hierarquia visual clara.
+- Bloco de atributos no painel apresentado como tiles de estatísticas.
+- Todas as telas com cabeçalho unificado e espaçamento/padding adequado.
+- Build e suíte de testes continuam verdes após o refinamento.
+
+**Requisitos:** RNF04 · §6.6

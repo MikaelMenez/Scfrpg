@@ -6,6 +6,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
@@ -16,10 +17,13 @@
             fitToWidth="true"
             styleClass="rolagem">
     <VBox spacing="20" alignment="TOP_CENTER" prefWidth="1366.0" prefHeight="768.0">
-        <VBox spacing="2" alignment="TOP_CENTER">
-            <Label text="Nova Ficha D&amp;D 5e" styleClass="titulo-pagina"/>
-            <Label text="Preencha a ficha para criar o personagem (RU01)" styleClass="subtitulo"/>
-        </VBox>
+        <HBox alignment="CENTER_LEFT" spacing="16" styleClass="header" maxWidth="1240.0">
+            <Label text="⚔" styleClass="logo-marca"/>
+            <VBox spacing="2" HBox.hgrow="ALWAYS">
+                <Label text="Nova Ficha D&amp;D 5e" styleClass="titulo-pagina"/>
+                <Label text="Preencha a ficha para criar o personagem (RU01)" styleClass="subtitulo"/>
+            </VBox>
+        </HBox>
 
         <HBox spacing="16" alignment="CENTER" maxWidth="1240.0">
             <VBox spacing="16" styleClass="card" HBox.hgrow="ALWAYS">
@@ -31,11 +35,11 @@
                     </HBox>
                     <HBox spacing="12" alignment="CENTER_LEFT">
                         <Label text="Raça" styleClass="rotulo" prefWidth="130"/>
-                        <ComboBox fx:id="comboRaca" styleClass="campo" HBox.hgrow="ALWAYS"/>
+                        <ComboBox fx:id="comboRaca" styleClass="combo" HBox.hgrow="ALWAYS"/>
                     </HBox>
                     <HBox spacing="12" alignment="CENTER_LEFT">
                         <Label text="Classe" styleClass="rotulo" prefWidth="130"/>
-                        <ComboBox fx:id="comboClasse" styleClass="campo" HBox.hgrow="ALWAYS"/>
+                        <ComboBox fx:id="comboClasse" styleClass="combo" HBox.hgrow="ALWAYS"/>
                     </HBox>
                     <HBox spacing="12" alignment="CENTER_LEFT">
                         <Label text="Nível" styleClass="rotulo" prefWidth="130"/>
@@ -47,14 +51,13 @@
                     <Label text="Atributos" styleClass="titulo-card"/>
                     <HBox spacing="8" alignment="CENTER_LEFT">
                         <Label text="Método" styleClass="rotulo" prefWidth="130"/>
-                        <ComboBox fx:id="comboMetodo" styleClass="campo" HBox.hgrow="ALWAYS"/>
+                        <ComboBox fx:id="comboMetodo" styleClass="combo" HBox.hgrow="ALWAYS"/>
                         <Button text="Gerar / Rolar" styleClass="botao botao-primario" onAction="#gerarAtributos"/>
                     </HBox>
                     <GridPane hgap="12" vgap="8">
                         <columnConstraints>
                             <ColumnConstraints minWidth="130"/>
                             <ColumnConstraints minWidth="70"/>
-                            <ColumnConstraints minWidth="60"/>
                             <ColumnConstraints minWidth="60"/>
                         </columnConstraints>
                         <Label text="Força" styleClass="rotulo" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
@@ -81,7 +84,7 @@
                         <TextField fx:id="campoCarisma" styleClass="campo" editable="false" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
                         <Label fx:id="modCarisma" styleClass="texto-mutado" GridPane.rowIndex="5" GridPane.columnIndex="2"/>
                     </GridPane>
-                    <Label fx:id="labelPontos" styleClass="texto-mutado" text="Pontos restantes: 27"/>
+                    <Label fx:id="labelPontos" styleClass="badge badge-ambar" text="Pontos restantes: 27"/>
                 </VBox>
             </VBox>
 
@@ -90,16 +93,16 @@
                     <Label text="Equipamento" styleClass="titulo-card"/>
                     <HBox spacing="12" alignment="CENTER_LEFT">
                         <Label text="Arma" styleClass="rotulo" prefWidth="130"/>
-                        <ComboBox fx:id="comboArma" styleClass="campo" HBox.hgrow="ALWAYS"/>
+                        <ComboBox fx:id="comboArma" styleClass="combo" HBox.hgrow="ALWAYS"/>
                     </HBox>
                     <HBox spacing="12" alignment="CENTER_LEFT">
                         <Label text="Armadura" styleClass="rotulo" prefWidth="130"/>
-                        <ComboBox fx:id="comboArmadura" styleClass="campo" HBox.hgrow="ALWAYS"/>
+                        <ComboBox fx:id="comboArmadura" styleClass="combo" HBox.hgrow="ALWAYS"/>
                     </HBox>
-                    <CheckBox fx:id="checkEscudo" text="Usar escudo (+2 CA)" styleClass="rotulo"/>
+                    <CheckBox fx:id="checkEscudo" text="Usar escudo (+2 CA)" styleClass="check-campo"/>
                 </VBox>
 
-                <VBox spacing="10">
+                <VBox spacing="6">
                     <Label text="Resumo da ficha" styleClass="titulo-card"/>
                     <Label fx:id="resumoPv" styleClass="rotulo"/>
                     <Label fx:id="resumoCa" styleClass="rotulo"/>

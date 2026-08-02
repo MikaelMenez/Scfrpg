@@ -3,6 +3,7 @@ package com.escudomestre.digital.presentation
 import com.escudomestre.digital.application.ObservadorDeMudanca
 import com.escudomestre.digital.application.SimuladorDeCombate
 import com.escudomestre.digital.domain.model.Atributo
+import com.escudomestre.digital.domain.model.EstadoCombate
 import com.escudomestre.digital.domain.model.Personagem
 import com.escudomestre.digital.domain.repository.PersonagemRepository
 import com.escudomestre.digital.domain.service.Vantagem
@@ -19,6 +20,7 @@ import javafx.scene.input.KeyCodeCombination
 import javafx.scene.input.KeyCombination
 import javafx.scene.layout.HBox
 import javafx.scene.layout.Priority
+import javafx.scene.layout.VBox
 import java.net.URL
 import java.util.ResourceBundle
 
@@ -199,7 +201,7 @@ class PainelDeJogoController : Initializable, ObservadorDeMudanca {
         fichas.setAll(personagemRepository.listar())
     }
 
-    /** Célula de ficha no painel: nome, raça/classe, nível e barra de PV. */
+    /** Célula de ficha no painel: avatar, nome, raça/classe, nível e barra de PV. */
     private class ListCellFicha : ListCell<Personagem>() {
         override fun updateItem(personagem: Personagem?, vazio: Boolean) {
             super.updateItem(personagem, vazio)
@@ -208,15 +210,23 @@ class PainelDeJogoController : Initializable, ObservadorDeMudanca {
                 graphic = null
                 return
             }
+            val avatar = Label(personagem.nome.take(1).uppercase()).apply { styleClass += "avatar-ficha" }
             val nome = Label(personagem.nome).apply { styleClass += "titulo-card" }
             val detalhes = Label("${personagem.raca.rotulo} · ${personagem.classe.rotulo} · Nível ${personagem.nivel}")
                 .apply { styleClass += "texto-mutado" }
             val pv = Label("PV ${personagem.pontosDeVidaAtual}/${personagem.pontosDeVidaMaximo} · CA ${personagem.classeArmadura}")
                 .apply { styleClass += "rotulo" }
-            val caixaTexto = javafx.scene.layout.VBox(4.0, nome, detalhes, pv)
-            val estado = Label(personagem.estado.name.replace("_", " ")).apply { styleClass += "badge" }
-            graphic = HBox(12.0, caixaTexto, estado)
+            val caixaTexto = VBox(4.0, nome, detalhes, pv)
+            val estado = Label(personagem.estado.name.replace("_", " ")).apply {
+                styleClass += "badge badge-estado"
+                if (personagem.estado == EstadoCombate.DERROTADO) {
+                    styleClass += "badge-estado-derrotado"
+                }
+            }
+            val avatarCaixa = VBox(avatar).apply { alignment = javafx.geometry.Pos.TOP_CENTER }
+            graphic = HBox(12.0, avatarCaixa, caixaTexto, estado)
             HBox.setHgrow(caixaTexto, Priority.ALWAYS)
+            alignment = javafx.geometry.Pos.CENTER_LEFT
         }
     }
 }
