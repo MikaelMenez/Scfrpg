@@ -217,5 +217,6 @@ class RepositorioIntegracaoTest {
         assertEquals(esperado.pontosDeVidaAtual, atual.pontosDeVidaAtual)
         assertEquals(esperado.pontosDeVidaMaximo, atual.pontosDeVidaMaximo)
         assertEquals(esperado.classeArmadura, atual.classeArmadura)
+        assertEquals(esperado.modificadorAtaque, atual.modificadorAtaque)
     }
 }

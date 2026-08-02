@@ -20,6 +20,7 @@ object PersonagensTable : Table("personagens") {
     val pontosVidaAtual = integer("pontos_vida_atual")
     val pontosVidaMaximo = integer("pontos_vida_maximo")
     val classeArmadura = integer("classe_armadura")
+    val modificadorAtaque = integer("modificador_ataque")
 
     override val primaryKey = PrimaryKey(id)
 }
@@ -64,6 +65,7 @@ internal fun ResultRow.toPersonagem(): Personagem = Personagem(
     pontosDeVidaAtual = this[PersonagensTable.pontosVidaAtual],
     pontosDeVidaMaximo = this[PersonagensTable.pontosVidaMaximo],
     classeArmadura = this[PersonagensTable.classeArmadura],
+    modificadorAtaque = this[PersonagensTable.modificadorAtaque],
 )
 
 internal fun ResultRow.toItem(): Item = Item(

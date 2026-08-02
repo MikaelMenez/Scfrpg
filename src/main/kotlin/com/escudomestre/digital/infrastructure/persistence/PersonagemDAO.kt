@@ -25,6 +25,7 @@ class PersonagemDAO {
                 it[pontosVidaAtual] = personagem.pontosDeVidaAtual
                 it[pontosVidaMaximo] = personagem.pontosDeVidaMaximo
                 it[classeArmadura] = personagem.classeArmadura
+                it[modificadorAtaque] = personagem.modificadorAtaque
             }
         }
     }
@@ -45,6 +46,7 @@ class PersonagemDAO {
                 it[pontosVidaAtual] = personagem.pontosDeVidaAtual
                 it[pontosVidaMaximo] = personagem.pontosDeVidaMaximo
                 it[classeArmadura] = personagem.classeArmadura
+                it[modificadorAtaque] = personagem.modificadorAtaque
             }
         }
     }

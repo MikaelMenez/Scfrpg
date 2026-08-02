@@ -19,6 +19,7 @@ class Personagem(
     var pontosDeVidaAtual: Int,
     var pontosDeVidaMaximo: Int,
     var classeArmadura: Int = 10,
+    var modificadorAtaque: Int = 0,
     var estado: EstadoCombate = EstadoCombate.AGUARDANDO_INICIATIVA,
 ) {
 
