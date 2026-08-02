@@ -48,3 +48,8 @@ class MainApp : Application() {
         stage.show()
     }
 }
+
+/** Ponto de entrada da aplicação (gera a classe MainAppKt referenciada no Gradle). */
+fun main() {
+    Application.launch(MainApp::class.java)
+}
