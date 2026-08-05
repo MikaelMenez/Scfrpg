@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -13,7 +17,6 @@
       xmlns:fx="http://javafx.com/fxml"
       alignment="TOP_LEFT"
       spacing="16"
-     
       prefWidth="1366.0"
       prefHeight="768.0">
     <HBox alignment="CENTER_LEFT" spacing="16" styleClass="header">
@@ -25,97 +28,189 @@
                    styleClass="subtitulo"/>
         </VBox>
     </HBox>
+
     <HBox spacing="16" VBox.vgrow="ALWAYS">
         <ListView fx:id="listaFichas"
                   styleClass="lista-fichas"
                   HBox.hgrow="ALWAYS"
                   VBox.vgrow="ALWAYS"
-                  minWidth="420.0"/>
+                  minWidth="380.0"
+                  prefWidth="420.0"
+                  maxWidth="520.0"/>
 
-        <VBox spacing="16"
-              HBox.hgrow="ALWAYS"
-              VBox.vgrow="ALWAYS"
-              minWidth="520.0"
-              styleClass="card">
-            <VBox spacing="6">
-                <Label text="Identidade" styleClass="titulo-card"/>
-                <HBox spacing="8" alignment="CENTER_LEFT">
-                    <Label text="Personagem:" styleClass="rotulo" prefWidth="130"/>
-                    <TextField fx:id="campoNome" editable="false" styleClass="campo" HBox.hgrow="ALWAYS"/>
-                </HBox>
-                <HBox spacing="8" alignment="CENTER_LEFT">
-                    <Label text="Raça · Classe:" styleClass="rotulo" prefWidth="130"/>
-                    <TextField fx:id="campoRacaClasse" editable="false" styleClass="campo" HBox.hgrow="ALWAYS"/>
-                </HBox>
-                <HBox spacing="8" alignment="CENTER_LEFT">
-                    <Label text="PV:" styleClass="rotulo" prefWidth="130"/>
-                    <TextField fx:id="campoPv" editable="false" styleClass="campo" HBox.hgrow="ALWAYS"/>
-                </HBox>
-                <HBox spacing="8" alignment="CENTER_LEFT">
-                    <Label text="CA:" styleClass="rotulo" prefWidth="130"/>
-                    <TextField fx:id="campoCa" editable="false" styleClass="campo" HBox.hgrow="ALWAYS"/>
-                </HBox>
-                <HBox spacing="8" alignment="CENTER_LEFT">
-                    <Label text="Arma:" styleClass="rotulo" prefWidth="130"/>
-                    <TextField fx:id="campoArma" editable="false" styleClass="campo" HBox.hgrow="ALWAYS"/>
-                </HBox>
-            </VBox>
+        <TabPane fx:id="painelAbas"
+                 styleClass="abas"
+                 HBox.hgrow="ALWAYS"
+                 VBox.vgrow="ALWAYS"
+                 minWidth="560.0"
+                 tabClosingPolicy="UNAVAILABLE">
 
-            <VBox spacing="8">
-                <Label text="Atributos" styleClass="titulo-card"/>
-                <GridPane hgap="8" vgap="8">
-                    <columnConstraints>
-                        <ColumnConstraints hgrow="ALWAYS" minWidth="0"/>
-                        <ColumnConstraints hgrow="ALWAYS" minWidth="0"/>
-                        <ColumnConstraints hgrow="ALWAYS" minWidth="0"/>
-                    </columnConstraints>
-                    <VBox styleClass="stat-tile" GridPane.rowIndex="0" GridPane.columnIndex="0">
-                        <Label text="FOR" styleClass="stat-abreviacao"/>
-                        <Label fx:id="campoForca" styleClass="stat-valor"/>
-                    </VBox>
-                    <VBox styleClass="stat-tile" GridPane.rowIndex="0" GridPane.columnIndex="1">
-                        <Label text="DES" styleClass="stat-abreviacao"/>
-                        <Label fx:id="campoDestreza" styleClass="stat-valor"/>
-                    </VBox>
-                    <VBox styleClass="stat-tile" GridPane.rowIndex="0" GridPane.columnIndex="2">
-                        <Label text="CON" styleClass="stat-abreviacao"/>
-                        <Label fx:id="campoConstituicao" styleClass="stat-valor"/>
-                    </VBox>
-                    <VBox styleClass="stat-tile" GridPane.rowIndex="1" GridPane.columnIndex="0">
-                        <Label text="INT" styleClass="stat-abreviacao"/>
-                        <Label fx:id="campoInteligencia" styleClass="stat-valor"/>
-                    </VBox>
-                    <VBox styleClass="stat-tile" GridPane.rowIndex="1" GridPane.columnIndex="1">
-                        <Label text="SAB" styleClass="stat-abreviacao"/>
-                        <Label fx:id="campoSabedoria" styleClass="stat-valor"/>
-                    </VBox>
-                    <VBox styleClass="stat-tile" GridPane.rowIndex="1" GridPane.columnIndex="2">
-                        <Label text="CAR" styleClass="stat-abreviacao"/>
-                        <Label fx:id="campoCarisma" styleClass="stat-valor"/>
-                    </VBox>
-                </GridPane>
-            </VBox>
+            <!-- ==================== Aba: Ficha ==================== -->
+            <Tab text="Ficha">
+                <ScrollPane fitToWidth="true" styleClass="rolagem">
+                    <VBox spacing="16" styleClass="conteudo-abas" alignment="TOP_LEFT">
+                        <VBox spacing="6">
+                            <Label text="Identidade" styleClass="titulo-card"/>
+                            <HBox spacing="8" alignment="CENTER_LEFT">
+                                <Label text="Personagem:" styleClass="rotulo" prefWidth="130"/>
+                                <TextField fx:id="campoNome" editable="false" styleClass="campo" HBox.hgrow="ALWAYS"/>
+                            </HBox>
+                            <HBox spacing="8" alignment="CENTER_LEFT">
+                                <Label text="Raça · Classe:" styleClass="rotulo" prefWidth="130"/>
+                                <TextField fx:id="campoRacaClasse" editable="false" styleClass="campo" HBox.hgrow="ALWAYS"/>
+                            </HBox>
+                            <HBox spacing="8" alignment="CENTER_LEFT">
+                                <Label text="PV:" styleClass="rotulo" prefWidth="130"/>
+                                <TextField fx:id="campoPv" editable="false" styleClass="campo" HBox.hgrow="ALWAYS"/>
+                            </HBox>
+                            <HBox spacing="8" alignment="CENTER_LEFT">
+                                <Label text="CA:" styleClass="rotulo" prefWidth="130"/>
+                                <TextField fx:id="campoCa" editable="false" styleClass="campo" HBox.hgrow="ALWAYS"/>
+                            </HBox>
+                            <HBox spacing="8" alignment="CENTER_LEFT">
+                                <Label text="Arma:" styleClass="rotulo" prefWidth="130"/>
+                                <TextField fx:id="campoArma" editable="false" styleClass="campo" HBox.hgrow="ALWAYS"/>
+                            </HBox>
+                        </VBox>
 
-            <VBox spacing="8">
-                <Label text="Ações de mesa" styleClass="titulo-card"/>
-                <HBox spacing="8" alignment="CENTER_LEFT">
-                    <Label text="CA do alvo:" styleClass="rotulo" prefWidth="130"/>
-                    <TextField fx:id="campoCaAlvo" text="10" styleClass="campo" HBox.hgrow="ALWAYS"/>
-                </HBox>
-                <HBox spacing="8" alignment="CENTER_LEFT">
-                    <Label text="Valor do dano:" styleClass="rotulo" prefWidth="130"/>
-                    <TextField fx:id="campoValorDano" text="1" styleClass="campo" HBox.hgrow="ALWAYS"/>
-                </HBox>
-                <HBox spacing="8" alignment="CENTER_LEFT">
-                    <Label text="Resultado da rolagem:" styleClass="rotulo" prefWidth="130"/>
-                    <TextField fx:id="campoResultadoRolagem" editable="false" styleClass="campo" HBox.hgrow="ALWAYS"/>
-                </HBox>
-                <HBox spacing="8">
-                    <Button text="Atacar (F5)" styleClass="botao botao-primario" onAction="#atacarAlvo" HBox.hgrow="ALWAYS"/>
-                    <Button text="Rolar Dano (F6)" styleClass="botao botao-primario" onAction="#rolarDano" HBox.hgrow="ALWAYS"/>
-                    <Button text="Aplicar Dano (F7)" styleClass="botao botao-perigo" onAction="#aplicarDano" HBox.hgrow="ALWAYS"/>
-                </HBox>
-            </VBox>
-        </VBox>
+                        <VBox spacing="8">
+                            <Label text="Atributos" styleClass="titulo-card"/>
+                            <GridPane hgap="8" vgap="8">
+                                <columnConstraints>
+                                    <ColumnConstraints hgrow="ALWAYS" minWidth="0"/>
+                                    <ColumnConstraints hgrow="ALWAYS" minWidth="0"/>
+                                    <ColumnConstraints hgrow="ALWAYS" minWidth="0"/>
+                                </columnConstraints>
+                                <VBox styleClass="stat-tile" GridPane.rowIndex="0" GridPane.columnIndex="0">
+                                    <Label text="FOR" styleClass="stat-abreviacao"/>
+                                    <Label fx:id="campoForca" styleClass="stat-valor"/>
+                                </VBox>
+                                <VBox styleClass="stat-tile" GridPane.rowIndex="0" GridPane.columnIndex="1">
+                                    <Label text="DES" styleClass="stat-abreviacao"/>
+                                    <Label fx:id="campoDestreza" styleClass="stat-valor"/>
+                                </VBox>
+                                <VBox styleClass="stat-tile" GridPane.rowIndex="0" GridPane.columnIndex="2">
+                                    <Label text="CON" styleClass="stat-abreviacao"/>
+                                    <Label fx:id="campoConstituicao" styleClass="stat-valor"/>
+                                </VBox>
+                                <VBox styleClass="stat-tile" GridPane.rowIndex="1" GridPane.columnIndex="0">
+                                    <Label text="INT" styleClass="stat-abreviacao"/>
+                                    <Label fx:id="campoInteligencia" styleClass="stat-valor"/>
+                                </VBox>
+                                <VBox styleClass="stat-tile" GridPane.rowIndex="1" GridPane.columnIndex="1">
+                                    <Label text="SAB" styleClass="stat-abreviacao"/>
+                                    <Label fx:id="campoSabedoria" styleClass="stat-valor"/>
+                                </VBox>
+                                <VBox styleClass="stat-tile" GridPane.rowIndex="1" GridPane.columnIndex="2">
+                                    <Label text="CAR" styleClass="stat-abreviacao"/>
+                                    <Label fx:id="campoCarisma" styleClass="stat-valor"/>
+                                </VBox>
+                            </GridPane>
+                        </VBox>
+
+                        <VBox spacing="8">
+                            <Label text="Ações de mesa" styleClass="titulo-card"/>
+                            <HBox spacing="8" alignment="CENTER_LEFT">
+                                <Label text="CA do alvo:" styleClass="rotulo" prefWidth="130"/>
+                                <TextField fx:id="campoCaAlvo" text="10" styleClass="campo" HBox.hgrow="ALWAYS"/>
+                            </HBox>
+                            <HBox spacing="8" alignment="CENTER_LEFT">
+                                <Label text="Valor do dano:" styleClass="rotulo" prefWidth="130"/>
+                                <TextField fx:id="campoValorDano" text="1" styleClass="campo" HBox.hgrow="ALWAYS"/>
+                            </HBox>
+                            <HBox spacing="8" alignment="CENTER_LEFT">
+                                <Label text="Resultado da rolagem:" styleClass="rotulo" prefWidth="130"/>
+                                <TextField fx:id="campoResultadoRolagem" editable="false" styleClass="campo" HBox.hgrow="ALWAYS"/>
+                            </HBox>
+                            <HBox spacing="8">
+                                <Button text="Atacar (F5)" styleClass="botao botao-primario" onAction="#atacarAlvo" HBox.hgrow="ALWAYS"/>
+                                <Button text="Rolar Dano (F6)" styleClass="botao botao-primario" onAction="#rolarDano" HBox.hgrow="ALWAYS"/>
+                                <Button text="Aplicar Dano (F7)" styleClass="botao botao-perigo" onAction="#aplicarDano" HBox.hgrow="ALWAYS"/>
+                                <Button text="Subir Nível" styleClass="botao botao-sucesso" onAction="#subirNivel" HBox.hgrow="ALWAYS"/>
+                            </HBox>
+                        </VBox>
+                    </VBox>
+                </ScrollPane>
+            </Tab>
+
+            <!-- ==================== Aba: Habilidades ==================== -->
+            <Tab text="Habilidades">
+                <ScrollPane fitToWidth="true" styleClass="rolagem">
+                    <VBox spacing="12" styleClass="conteudo-abas" alignment="TOP_LEFT">
+                        <Label fx:id="labelConjuracao" styleClass="badge badge-ambar" wrapText="true"/>
+                        <Label fx:id="labelSlots" styleClass="rotulo" wrapText="true"/>
+                        <Label text="Habilidades de classe" styleClass="titulo-card"/>
+                        <ListView fx:id="listaHabilidades"
+                                  styleClass="lista-fichas"
+                                  prefHeight="420.0"
+                                  VBox.vgrow="ALWAYS"/>
+                    </VBox>
+                </ScrollPane>
+            </Tab>
+
+            <!-- ==================== Aba: Grimório ==================== -->
+            <Tab text="Grimório">
+                <ScrollPane fitToWidth="true" styleClass="rolagem">
+                    <VBox spacing="12" styleClass="conteudo-abas" alignment="TOP_LEFT">
+                        <Label text="Slots de magia" styleClass="titulo-card"/>
+                        <Label fx:id="labelSlotsGrimorio" styleClass="rotulo" wrapText="true"/>
+
+                        <Label text="Adicionar magia" styleClass="titulo-card"/>
+                        <HBox spacing="8" alignment="CENTER_LEFT">
+                            <ComboBox fx:id="comboMagia" styleClass="combo" HBox.hgrow="ALWAYS"/>
+                            <Button text="Adicionar" styleClass="botao botao-primario" onAction="#adicionarMagia"/>
+                        </HBox>
+
+                        <Label text="Magias conhecidas" styleClass="titulo-card"/>
+                        <ListView fx:id="listaMagias"
+                                  styleClass="lista-fichas"
+                                  prefHeight="360.0"
+                                  VBox.vgrow="ALWAYS"/>
+                    </VBox>
+                </ScrollPane>
+            </Tab>
+
+            <!-- ==================== Aba: Inventário ==================== -->
+            <Tab text="Inventário">
+                <ScrollPane fitToWidth="true" styleClass="rolagem">
+                    <VBox spacing="12" styleClass="conteudo-abas" alignment="TOP_LEFT">
+                        <Label text="Adicionar item" styleClass="titulo-card"/>
+                        <HBox spacing="8" alignment="CENTER_LEFT">
+                            <Label text="Nome" styleClass="rotulo" prefWidth="60"/>
+                            <TextField fx:id="campoItemNome" promptText="ex.: Poção de cura" styleClass="campo" HBox.hgrow="ALWAYS"/>
+                        </HBox>
+                        <HBox spacing="8" alignment="CENTER_LEFT">
+                            <Label text="Peso" styleClass="rotulo" prefWidth="60"/>
+                            <TextField fx:id="campoItemPeso" text="0.5" styleClass="campo" prefWidth="100"/>
+                            <Label text="Qtd" styleClass="rotulo" prefWidth="30"/>
+                            <TextField fx:id="campoItemQuantidade" text="1" styleClass="campo" prefWidth="80"/>
+                            <Button text="Adicionar" styleClass="botao botao-sucesso" onAction="#adicionarItem" HBox.hgrow="ALWAYS"/>
+                        </HBox>
+
+                        <Label text="Itens carregados" styleClass="titulo-card"/>
+                        <Label fx:id="labelPesoTotal" styleClass="texto-mutado"/>
+                        <ListView fx:id="listaItens"
+                                  styleClass="lista-fichas"
+                                  prefHeight="380.0"
+                                  VBox.vgrow="ALWAYS"/>
+                    </VBox>
+                </ScrollPane>
+            </Tab>
+
+            <!-- ==================== Aba: Histórico ==================== -->
+            <Tab text="Histórico">
+                <ScrollPane fitToWidth="true" styleClass="rolagem">
+                    <VBox spacing="12" styleClass="conteudo-abas" alignment="TOP_LEFT">
+                        <Label text="Registros da sessão" styleClass="titulo-card"/>
+                        <Label text="Ataques, dano e magias executados ficam registrados automaticamente (RU03)."
+                               styleClass="texto-mutado" wrapText="true"/>
+                        <ListView fx:id="listaHistorico"
+                                  styleClass="lista-fichas"
+                                  prefHeight="560.0"
+                                  VBox.vgrow="ALWAYS"/>
+                    </VBox>
+                </ScrollPane>
+            </Tab>
+        </TabPane>
     </HBox>
 </VBox>

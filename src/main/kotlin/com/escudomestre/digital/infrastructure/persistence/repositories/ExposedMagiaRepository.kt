@@ -23,6 +23,13 @@ class ExposedMagiaRepository : MagiaRepository {
                 it[MagiasTable.personagemId] = personagemId
                 it[nome] = magia.nome
                 it[nivel] = magia.nivel
+                it[escola] = magia.escola.name
+                it[tempoConjuracao] = magia.tempoConjuracao
+                it[alcance] = magia.alcance
+                it[componentes] = magia.componentes
+                it[duracao] = magia.duracao
+                it[requerConcentracao] = magia.requerConcentracao
+                it[descricao] = magia.descricao
                 it[preparada] = magia.preparada
                 it[slotGasto] = magia.slotGasto
             }
@@ -47,6 +54,13 @@ class ExposedMagiaRepository : MagiaRepository {
             MagiasTable.update({ MagiasTable.id eq magia.id }, null) {
                 it[nome] = magia.nome
                 it[nivel] = magia.nivel
+                it[escola] = magia.escola.name
+                it[tempoConjuracao] = magia.tempoConjuracao
+                it[alcance] = magia.alcance
+                it[componentes] = magia.componentes
+                it[duracao] = magia.duracao
+                it[requerConcentracao] = magia.requerConcentracao
+                it[descricao] = magia.descricao
                 it[preparada] = magia.preparada
                 it[slotGasto] = magia.slotGasto
             }

@@ -5,31 +5,36 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:controller="com.escudomestre.digital.presentation.SelecaoPersonagemController"
-      xmlns:fx="http://javafx.com/fxml"
-      alignment="TOP_LEFT"
-      spacing="20"
-     
-      prefWidth="1366.0"
-      prefHeight="768.0">
-    <HBox alignment="CENTER_LEFT" spacing="16" styleClass="header">
-        <Label text="⚔" styleClass="logo-marca"/>
-        <VBox spacing="2" HBox.hgrow="ALWAYS">
-            <Label text="O Escudo do Mestre Digital" styleClass="titulo-pagina"/>
-            <Label text="Selecione uma ficha para conduzir na mesa" styleClass="subtitulo"/>
+<StackPane fx:controller="com.escudomestre.digital.presentation.SelecaoPersonagemController"
+           xmlns:fx="http://javafx.com/fxml"
+           prefWidth="1366.0"
+           prefHeight="768.0">
+    <VBox alignment="TOP_CENTER" spacing="20" prefWidth="1366.0" prefHeight="768.0">
+        <HBox alignment="CENTER_LEFT" spacing="16" styleClass="header" maxWidth="1240.0" VBox.vgrow="NEVER">
+            <Label text="⚔" styleClass="logo-marca"/>
+            <VBox spacing="2" HBox.hgrow="ALWAYS">
+                <Label text="O Escudo do Mestre Digital" styleClass="titulo-pagina"/>
+                <Label text="Selecione uma ficha para conduzir na mesa" styleClass="subtitulo"/>
+            </VBox>
+        </HBox>
+
+        <VBox spacing="8" VBox.vgrow="ALWAYS" maxWidth="1240.0">
+            <Label text="Quem vai para a mesa hoje?" styleClass="titulo-netflix" VBox.vgrow="NEVER"/>
+            <Label fx:id="estadoVazio"
+                   text="Nenhuma ficha criada ainda. Clique no card &quot;+&quot; para começar."
+                   styleClass="texto-mutado"
+                   managed="false"
+                   visible="false"/>
+
+            <ScrollPane fitToWidth="true" styleClass="rolagem" VBox.vgrow="ALWAYS">
+                <FlowPane fx:id="containerCards"
+                          hgap="20"
+                          vgap="20"
+                          alignment="CENTER"/>
+            </ScrollPane>
         </VBox>
-        <Button text="+ Nova Ficha" styleClass="botao botao-primario" onAction="#criarNovaFicha"/>
-    </HBox>
-
-    <Label fx:id="estadoVazio"
-           text="Nenhuma ficha criada ainda. Clique em &quot;+ Nova Ficha&quot; para começar."
-           styleClass="texto-mutado card"
-           managed="false"
-           visible="false"/>
-
-    <ScrollPane fitToWidth="true" styleClass="rolagem" VBox.vgrow="ALWAYS">
-        <FlowPane fx:id="containerCards" hgap="16" vgap="16"/>
-    </ScrollPane>
-</VBox>
+    </VBox>
+</StackPane>

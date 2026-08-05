@@ -184,6 +184,14 @@
 .botao-perigo:hover { -fx-background-color: linear-gradient(to bottom, #fda4af, #fb7185); }
 .botao-perigo:pressed { -fx-background-color: #e11d48; }
 
+.botao:disabled {
+    -fx-opacity: 0.45;
+    -fx-effect: none;
+    -fx-background-color: #334155;
+    -fx-text-fill: #94a3b8;
+    -fx-cursor: default;
+}
+
 /* ---------- Campos de texto ---------- */
 
 .campo {
@@ -202,6 +210,17 @@
     -fx-border-color: #6366f1;
     -fx-border-width: 2px;
     -fx-padding: 8px 11px;
+}
+.campo:disabled {
+    -fx-opacity: 0.55;
+    -fx-text-fill: #94a3b8;
+    -fx-background-color: #1e293b;
+}
+
+.check-campo:disabled,
+.combo:disabled {
+    -fx-opacity: 0.5;
+    -fx-cursor: default;
 }
 
 /* ---------- ComboBox ---------- */
@@ -430,3 +449,142 @@
     -fx-pref-height: 1px;
     -fx-max-height: 1px;
 }
+
+/* =====================================================================
+   Seleção estilo Netflix (perfis)
+   ===================================================================== */
+
+.titulo-netflix {
+    -fx-text-fill: #f8fafc;
+    -fx-font-size: 22px;
+    -fx-font-weight: 800;
+    -fx-padding: 18px 0 6px 0;
+}
+
+.card-poster {
+    -fx-padding: 0;
+    -fx-background-color: transparent;
+    -fx-background-radius: 16px;
+    -fx-border-color: transparent;
+    -fx-border-width: 1px;
+    -fx-border-radius: 16px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.45), 18, 0.25, 0, 8);
+    -fx-translate-y: 0;
+}
+
+.card-poster:hover {
+    -fx-border-color: #818cf8;
+    -fx-scale-x: 1.045;
+    -fx-scale-y: 1.045;
+    -fx-translate-y: -4;
+    -fx-effect: dropshadow(gaussian, rgba(99, 102, 241, 0.55), 26, 0.35, 0, 10);
+}
+
+.poster-ficha {
+    -fx-min-height: 190px;
+    -fx-pref-height: 190px;
+    -fx-max-height: 190px;
+    -fx-background-color: linear-gradient(to bottom right, #312e81, #4f46e5 55%, #1e1b4b);
+    -fx-background-radius: 16px 16px 0 0;
+}
+
+.avatar-poster {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 64px;
+    -fx-font-weight: 800;
+    -fx-background-color: rgba(255, 255, 255, 0.10);
+    -fx-background-radius: 999px;
+    -fx-min-width: 110px;
+    -fx-min-height: 110px;
+    -fx-alignment: center;
+}
+
+.nome-poster {
+    -fx-text-fill: #f1f5f9;
+    -fx-font-size: 16px;
+    -fx-font-weight: 700;
+}
+
+.poster-novo {
+    -fx-min-height: 190px;
+    -fx-pref-height: 190px;
+    -fx-max-height: 190px;
+    -fx-background-color: rgba(30, 41, 59, 0.85);
+    -fx-background-radius: 16px 16px 0 0;
+    -fx-border-color: #334155;
+    -fx-border-width: 1px;
+}
+
+.mais-perfil {
+    -fx-text-fill: #64748b;
+    -fx-font-size: 64px;
+    -fx-font-weight: 200;
+}
+
+.poster-novo:hover {
+    -fx-background-color: rgba(51, 65, 85, 0.85);
+    -fx-border-color: #818cf8;
+}
+.poster-novo:hover .mais-perfil {
+    -fx-text-fill: #f8fafc;
+}
+
+/* =====================================================================
+   Abas (TabPane) do Painel de Jogo
+   ===================================================================== */
+
+.abas {
+    -fx-background-color: rgba(30, 41, 59, 0.92);
+    -fx-background-radius: 14px;
+    -fx-border-color: #334155;
+    -fx-border-radius: 14px;
+    -fx-padding: 0;
+    -fx-tab-min-height: 40px;
+    -fx-tab-max-height: 40px;
+}
+
+.abas > .tab-header-area {
+    -fx-padding: 10px 14px 0 14px;
+}
+
+.abas > .tab-header-area > .tab-header-background {
+    -fx-background-color: transparent;
+}
+
+.abas .tab {
+    -fx-background-color: rgba(51, 65, 85, 0.5);
+    -fx-background-radius: 10px 10px 0 0;
+    -fx-padding: 8px 18px;
+    -fx-border-color: transparent;
+}
+
+.abas .tab:hover {
+    -fx-background-color: #334155;
+}
+
+.abas .tab:selected {
+    -fx-background-color: #4f46e5;
+}
+
+.abas .tab .tab-label {
+    -fx-text-fill: #94a3b8;
+    -fx-font-weight: 700;
+    -fx-font-size: 13px;
+}
+
+.abas .tab:hover .tab-label {
+    -fx-text-fill: #e2e8f0;
+}
+
+.abas .tab:selected .tab-label {
+    -fx-text-fill: #ffffff;
+}
+
+.abas > .tab-header-area > .headers-region > .tab:selected .focus-indicator {
+    -fx-border-color: transparent;
+}
+
+.conteudo-abas {
+    -fx-padding: 16px 18px 20px 18px;
+}
+

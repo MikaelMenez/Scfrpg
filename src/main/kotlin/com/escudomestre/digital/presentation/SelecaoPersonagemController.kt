@@ -4,18 +4,21 @@ import com.escudomestre.digital.domain.model.Personagem
 import com.escudomestre.digital.domain.repository.PersonagemRepository
 import javafx.fxml.FXML
 import javafx.fxml.Initializable
+import javafx.geometry.Pos
 import javafx.scene.control.Button
 import javafx.scene.control.Label
 import javafx.scene.control.ProgressBar
 import javafx.scene.layout.FlowPane
 import javafx.scene.layout.HBox
+import javafx.scene.layout.StackPane
 import javafx.scene.layout.VBox
 import java.net.URL
 import java.util.ResourceBundle
 
 /**
- * Tela de seleção de fichas (RU01): apresenta os personagens persistidos como
- * cards, permitindo abrir uma ficha na mesa ou criar uma nova.
+ * Tela de seleção de fichas estilo "perfis" (como Netflix): grandes cards-pôster
+ * em um grid centralizado, com avatar, nível, classe e barra de PV, além de um
+ * card de ação para criar uma nova ficha.
  */
 class SelecaoPersonagemController : Initializable {
 
@@ -42,43 +45,75 @@ class SelecaoPersonagemController : Initializable {
     private fun carregarFichas() {
         val fichas = personagemRepository.listar()
         containerCards.children.clear()
-        fichas.forEach { containerCards.children += criarCard(it) }
+        fichas.forEach { containerCards.children += criarCardPose(it) }
+        containerCards.children += criarCardNovo()
         estadoVazio.isVisible = fichas.isEmpty()
         estadoVazio.isManaged = fichas.isEmpty()
     }
 
-    private fun criarCard(personagem: Personagem): VBox {
-        val avatar = Label(personagem.nome.take(1).uppercase()).apply {
-            styleClass += "avatar-ficha"
+    /** Card-pôster (Netflix) de um personagem salvo. */
+    private fun criarCardPose(personagem: Personagem): VBox {
+        val inicial = personagem.nome.take(1).uppercase()
+        val avatar = Label(inicial).apply {
+            styleClass += "avatar-poster"
         }
-        val nome = Label(personagem.nome).apply { styleClass += "titulo-card" }
-        val detalhes = Label("${personagem.raca.rotulo} · ${personagem.classe.rotulo}")
-            .apply { styleClass += "texto-mutado" }
-        val cabecalho = HBox(12.0, avatar, VBox(2.0, nome, detalhes)).apply {
-            alignment = javafx.geometry.Pos.CENTER_LEFT
+        val nivel = Label("Nível ${personagem.nivel}").apply {
+            styleClass += "badge badge-ambar"
+        }
+        val bannerNivel = StackPane(nivel).apply {
+            alignment = Pos.TOP_RIGHT
+            translateX = -14.0
+            translateY = 10.0
+        }
+        val poster = StackPane(avatar, bannerNivel).apply {
+            styleClass += "poster-ficha"
         }
 
-        val badge = Label("Nível ${personagem.nivel}").apply { styleClass += "badge badge-ambar" }
+        val nome = Label(personagem.nome).apply {
+            styleClass += "nome-poster"
+        }
+        val sub = Label("${personagem.raca.rotulo} · ${personagem.classe.rotulo}").apply {
+            styleClass += "texto-mutado"
+        }
 
         val pvBarra = ProgressBar(proporcaoPv(personagem)).apply {
             styleClass += "progresso-pv"
             prefWidth = 220.0
             maxWidth = 220.0
         }
-        val pvTexto = Label("PV ${personagem.pontosDeVidaAtual}/${personagem.pontosDeVidaMaximo}")
+        val pv = Label("PV ${personagem.pontosDeVidaAtual}/${personagem.pontosDeVidaMaximo} · CA ${personagem.classeArmadura}")
             .apply { styleClass += "rotulo" }
-        val ca = Label("Classe de Armadura ${personagem.classeArmadura}").apply { styleClass += "texto-mutado" }
 
-        val abrir = Button("Abrir ficha").apply { styleClass += "botao botao-primario" }
-        abrir.setOnMouseClicked { evento ->
-            evento.consume()
-            app.mostrarPainel(personagem)
+        val jogar = Button("Jogar").apply {
+            styleClass += "botao"
+            styleClass += "botao-primario"
+            maxWidth = Double.MAX_VALUE
+        }
+        jogar.setOnAction { app.mostrarPainel(personagem) }
+
+        val corpo = VBox(8.0, nome, sub, pvBarra, pv, jogar).apply {
+            alignment = Pos.CENTER_LEFT
+            padding = javafx.geometry.Insets(0.0, 14.0, 14.0, 14.0)
         }
 
-        return VBox(10.0, cabecalho, badge, pvBarra, pvTexto, ca, abrir).apply {
-            styleClass += "card card-ficha"
-            prefWidth = 260.0
+        return VBox(0.0, poster, corpo).apply {
+            styleClass += "card"
+            styleClass += "card-poster"
+            prefWidth = 280.0
             setOnMouseClicked { app.mostrarPainel(personagem) }
+        }
+    }
+
+    /** Card de ação para criar uma nova ficha (estilo "novo perfil"). */
+    private fun criarCardNovo(): VBox {
+        val mais = Label("+").apply { styleClass += "mais-perfil" }
+        val poster = StackPane(mais).apply { styleClass += "poster-novo" }
+        val rotulo = Label("Nova Ficha").apply { styleClass += "nome-poster" }
+        return VBox(10.0, poster, rotulo).apply {
+            styleClass += "card"
+            styleClass += "card-poster"
+            prefWidth = 280.0
+            setOnMouseClicked { app.mostrarCriacao() }
         }
     }
 

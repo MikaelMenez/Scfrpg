@@ -4,6 +4,7 @@ import com.escudomestre.digital.domain.model.Armadura
 import com.escudomestre.digital.domain.model.Arma
 import com.escudomestre.digital.domain.model.Atributo
 import com.escudomestre.digital.domain.model.ClasseDePersonagem
+import com.escudomestre.digital.domain.model.EscolaDeMagia
 import com.escudomestre.digital.domain.model.Item
 import com.escudomestre.digital.domain.model.Magia
 import com.escudomestre.digital.domain.model.Personagem
@@ -52,6 +53,13 @@ object MagiasTable : Table("magias") {
     val personagemId = varchar("personagem_id", 36).references(PersonagensTable.id)
     val nome = varchar("nome", 100)
     val nivel = integer("nivel")
+    val escola = varchar("escola", 30)
+    val tempoConjuracao = varchar("tempo_conjuracao", 60)
+    val alcance = varchar("alcance", 60)
+    val componentes = varchar("componentes", 60)
+    val duracao = varchar("duracao", 60)
+    val requerConcentracao = bool("requer_concentracao")
+    val descricao = text("descricao")
     val preparada = bool("preparada")
     val slotGasto = bool("slot_gasto")
 
@@ -103,6 +111,13 @@ internal fun ResultRow.toMagia(): Magia = Magia(
     id = this[MagiasTable.id],
     nome = this[MagiasTable.nome],
     nivel = this[MagiasTable.nivel],
+    escola = EscolaDeMagia.valueOf(this[MagiasTable.escola]),
+    tempoConjuracao = this[MagiasTable.tempoConjuracao],
+    alcance = this[MagiasTable.alcance],
+    componentes = this[MagiasTable.componentes],
+    duracao = this[MagiasTable.duracao],
+    requerConcentracao = this[MagiasTable.requerConcentracao],
+    descricao = this[MagiasTable.descricao],
     preparada = this[MagiasTable.preparada],
     slotGasto = this[MagiasTable.slotGasto],
 )

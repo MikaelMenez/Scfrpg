@@ -2,10 +2,15 @@ package com.escudomestre.digital.presentation
 
 import com.escudomestre.digital.application.SimuladorDeCombate
 import com.escudomestre.digital.domain.model.Personagem
+import com.escudomestre.digital.domain.repository.HistoricoRepository
+import com.escudomestre.digital.domain.repository.ItemRepository
+import com.escudomestre.digital.domain.repository.MagiaRepository
 import com.escudomestre.digital.domain.repository.PersonagemRepository
 import com.escudomestre.digital.infrastructure.persistence.DatabaseFactory
 import com.escudomestre.digital.infrastructure.persistence.PersonagemDAO
 import com.escudomestre.digital.infrastructure.persistence.repositories.ExposedHistoricoRepository
+import com.escudomestre.digital.infrastructure.persistence.repositories.ExposedItemRepository
+import com.escudomestre.digital.infrastructure.persistence.repositories.ExposedMagiaRepository
 import com.escudomestre.digital.infrastructure.persistence.repositories.ExposedPersonagemRepository
 import javafx.application.Application
 import javafx.fxml.FXMLLoader
@@ -24,15 +29,21 @@ class MainApp : Application() {
     private lateinit var stage: Stage
     private lateinit var scene: Scene
     private lateinit var personagemRepository: PersonagemRepository
+    private lateinit var itemRepository: ItemRepository
+    private lateinit var magiaRepository: MagiaRepository
     private lateinit var simulador: SimuladorDeCombate
+    private lateinit var historicoRepository: HistoricoRepository
 
     override fun start(stage: Stage) {
         DatabaseFactory.init()
 
         personagemRepository = ExposedPersonagemRepository(PersonagemDAO())
+        itemRepository = ExposedItemRepository()
+        magiaRepository = ExposedMagiaRepository()
+        historicoRepository = ExposedHistoricoRepository()
         simulador = SimuladorDeCombate(
             personagemRepository = personagemRepository,
-            historicoRepository = ExposedHistoricoRepository(),
+            historicoRepository = historicoRepository,
         )
 
         this.stage = stage
@@ -64,7 +75,7 @@ class MainApp : Application() {
     fun mostrarPainel(personagem: Personagem) {
         val loader = carregarLoader("PainelDeJogo.fxml")
         val controller = loader.getController<PainelDeJogoController>()
-        controller.inicializar(this, simulador, personagemRepository)
+        controller.inicializar(this, simulador, personagemRepository, itemRepository, magiaRepository, historicoRepository)
         controller.selecionar(personagem)
         aplicarCena(loader.getRoot() as Parent)
         controller.aplicarAtalhos(scene)
