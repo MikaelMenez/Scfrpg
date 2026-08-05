@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+
+<SplitPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="presentation.controller.GerenciarFichasController"
+           dividerPositions="0.35">
+
+    <VBox spacing="10">
+        <padding><Insets top="10" right="10" bottom="10" left="10"/></padding>
+        <Label text="Fichas Cadastradas" styleClass="titulo"/>
+        <ListView fx:id="listFichas" VBox.vgrow="ALWAYS"/>
+    </VBox>
+
+    <VBox spacing="10">
+        <padding><Insets top="10" right="10" bottom="10" left="10"/></padding>
+        <Label text="Detalhes da Ficha" styleClass="titulo"/>
+        <GridPane vgap="8" hgap="10">
+            <Label text="Nome:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+            <TextField fx:id="txtNome" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+            <Label text="Raça:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+            <TextField fx:id="txtRaca" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+            <Label text="Classe:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+            <TextField fx:id="txtClasse" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+            <Label text="Nível:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+            <TextField fx:id="txtNivel" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+
+            <Label text="PV Atual:" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+            <TextField fx:id="txtPVAtual" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+
+            <Label text="PV Máx:" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+            <TextField fx:id="txtPVMax" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+
+            <Label text="CA:" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
+            <TextField fx:id="txtCA" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
+        </GridPane>
+
+        <Button fx:id="btnSalvar" text="Salvar Alterações" styleClass="botao-principal"/>
+
+        <HBox spacing="10">
+            <VBox HBox.hgrow="ALWAYS">
+                <Label text="Inventário" styleClass="subtitulo"/>
+                <VBox fx:id="vboxInventario" spacing="2"/>
+                <Button fx:id="btnAdicionarItem" text="+ Item" styleClass="botao-secundario"/>
+            </VBox>
+            <VBox HBox.hgrow="ALWAYS">
+                <Label text="Grimório" styleClass="subtitulo"/>
+                <VBox fx:id="vboxGrimorio" spacing="2"/>
+                <Button fx:id="btnAdicionarMagia" text="+ Magia" styleClass="botao-secundario"/>
+            </VBox>
+        </HBox>
+    </VBox>
+</SplitPane>

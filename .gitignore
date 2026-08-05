@@ -1,0 +1,17 @@
+# Gradle
+build/
+.gradle/
+!.gradle/wrapper/gradle-wrapper.jar
+
+# IDEs
+.idea/
+*.iml
+.vscode/
+
+# OS
+.DS_Store
+
+# Bancos locais (dados de execução/teste)
+*.db
+test_escudo.db
+escudo.db

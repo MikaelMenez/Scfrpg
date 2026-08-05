@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.shape.Rectangle?>
+
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="presentation.controller.PainelCombateController"
+      spacing="12">
+    <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+
+    <Label text="Painel de Combate e Simulador" styleClass="titulo"/>
+
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="Personagem:"/>
+        <ComboBox fx:id="comboPersonagem" prefWidth="250"/>
+    </HBox>
+
+    <GridPane vgap="8" hgap="15">
+        <Label text="Nome:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+        <Label fx:id="lblNome" text="-" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+        <Label text="PV:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+        <Label fx:id="lblPV" text="-" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+        <Rectangle fx:id="barraPV" width="300" height="20" fill="DARKGREEN" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+
+        <Label text="CA:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+        <Label fx:id="lblCA" text="-" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+        <Label text="Estado:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+        <ComboBox fx:id="comboEstado" prefWidth="220" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+    </GridPane>
+
+    <HBox spacing="10">
+        <VBox spacing="5"><Label text="Mod. Ataque"/><TextField fx:id="txtModAtaque" text="0" prefWidth="80"/></VBox>
+        <VBox spacing="5"><Label text="Dano/Valor"/><TextField fx:id="txtDano" text="0" prefWidth="80"/></VBox>
+        <VBox spacing="5"><Label text="Vantagem"/><CheckBox fx:id="checkVantagem"/></VBox>
+        <VBox spacing="5"><Label text="Desvantagem"/><CheckBox fx:id="checkDesvantagem"/></VBox>
+    </HBox>
+
+    <HBox spacing="10">
+        <Button fx:id="btnRolarAtaque" text="F5 - Rolar Ataque" styleClass="botao-principal"/>
+        <Button fx:id="btnRolarDano" text="F6 - Rolar Dano" styleClass="botao-principal"/>
+        <Button fx:id="btnAplicarDano" text="F7 - Aplicar Dano" styleClass="botao-alerta"/>
+        <Button fx:id="btnCurar" text="Curar" styleClass="botao-secundario"/>
+        <Button fx:id="btnLevelUp" text="Subir Nível" styleClass="botao-secundario"/>
+    </HBox>
+
+    <Label text="Resultado:"/>
+    <TextField fx:id="txtResultado" editable="false" prefWidth="200"/>
+
+    <Label text="Histórico de Rolagens da Sessão" styleClass="subtitulo"/>
+    <ListView fx:id="listHistorico" VBox.vgrow="ALWAYS"/>
+</VBox>

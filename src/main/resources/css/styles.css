@@ -1,0 +1,50 @@
+.root {
+    -fx-font-family: "Segoe UI", sans-serif;
+    -fx-font-size: 14px;
+    -fx-background-color: #f4f4f4;
+}
+
+.titulo {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2c3e50;
+}
+
+.subtitulo {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #34495e;
+}
+
+.botao-principal {
+    -fx-background-color: #2980b9;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 10 20;
+    -fx-cursor: hand;
+}
+
+.botao-secundario {
+    -fx-background-color: #27ae60;
+    -fx-text-fill: white;
+    -fx-padding: 8 16;
+    -fx-cursor: hand;
+}
+
+.botao-alerta {
+    -fx-background-color: #c0392b;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 10 20;
+    -fx-cursor: hand;
+}
+
+.preview {
+    -fx-text-fill: #7f8c8d;
+    -fx-font-style: italic;
+}
+
+.hint {
+    -fx-text-fill: #95a5a6;
+    -fx-font-size: 12px;
+}

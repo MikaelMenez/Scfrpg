@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="presentation.controller.MenuInicialController"
+      alignment="CENTER" spacing="20" styleClass="root">
+    <padding><Insets top="40" right="40" bottom="40" left="40"/></padding>
+
+    <Label text="O Escudo do Mestre Digital" styleClass="titulo"/>
+    <Label text="Ferramenta digital para mesas de RPG" styleClass="subtitulo"/>
+
+    <Button fx:id="btnNovoHeroi" text="+ Criar Novo Herói" prefWidth="300" styleClass="botao-principal"/>
+    <Button fx:id="btnGerenciarFichas" text="Gerenciar Fichas" prefWidth="300" styleClass="botao-principal"/>
+    <Button fx:id="btnPainelCombate" text="Painel de Combate e Simulador" prefWidth="300" styleClass="botao-principal"/>
+
+    <Label text="Atalhos: F5=Ataque | F6=Dano | F7=Aplicar Dano" styleClass="hint"/>
+</VBox>

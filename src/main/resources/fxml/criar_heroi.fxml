@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="presentation.controller.CriarHeroiController"
+      spacing="10">
+    <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+
+    <Label text="Criar Novo Herói" styleClass="titulo"/>
+
+    <GridPane vgap="8" hgap="10">
+        <Label text="Nome:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+        <TextField fx:id="txtNome" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+        <Label text="Raça:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+        <ComboBox fx:id="comboRaca" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+        <Label text="Classe:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+        <ComboBox fx:id="comboClasse" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+        <Label text="Método Atributos:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+        <ComboBox fx:id="comboMetodo" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+    </GridPane>
+
+    <GridPane vgap="8" hgap="10">
+        <Label text="Arma:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+        <ComboBox fx:id="comboArma" prefWidth="220" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+        <Label text="Armadura:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+        <ComboBox fx:id="comboArmadura" prefWidth="220" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+        <Label text="Escudo:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+        <CheckBox fx:id="chkEscudo" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+    </GridPane>
+
+    <Label text="Compra de Pontos (27 pontos, valores 8-15):" styleClass="preview"/>
+    <HBox spacing="8" styleClass="atributos-grid">
+        <VBox spacing="2"><Label text="FOR"/><HBox alignment="CENTER" spacing="2"><Button fx:id="btnMinFOR" text="−" disable="true"/><TextField fx:id="txtFOR" prefWidth="50" editable="false"/><Button fx:id="btnMaxFOR" text="+" disable="true"/></HBox></VBox>
+        <VBox spacing="2"><Label text="DES"/><HBox alignment="CENTER" spacing="2"><Button fx:id="btnMinDES" text="−" disable="true"/><TextField fx:id="txtDES" prefWidth="50" editable="false"/><Button fx:id="btnMaxDES" text="+" disable="true"/></HBox></VBox>
+        <VBox spacing="2"><Label text="CON"/><HBox alignment="CENTER" spacing="2"><Button fx:id="btnMinCON" text="−" disable="true"/><TextField fx:id="txtCON" prefWidth="50" editable="false"/><Button fx:id="btnMaxCON" text="+" disable="true"/></HBox></VBox>
+        <VBox spacing="2"><Label text="INT"/><HBox alignment="CENTER" spacing="2"><Button fx:id="btnMinINT" text="−" disable="true"/><TextField fx:id="txtINT" prefWidth="50" editable="false"/><Button fx:id="btnMaxINT" text="+" disable="true"/></HBox></VBox>
+        <VBox spacing="2"><Label text="SAB"/><HBox alignment="CENTER" spacing="2"><Button fx:id="btnMinSAB" text="−" disable="true"/><TextField fx:id="txtSAB" prefWidth="50" editable="false"/><Button fx:id="btnMaxSAB" text="+" disable="true"/></HBox></VBox>
+        <VBox spacing="2"><Label text="CAR"/><HBox alignment="CENTER" spacing="2"><Button fx:id="btnMinCAR" text="−" disable="true"/><TextField fx:id="txtCAR" prefWidth="50" editable="false"/><Button fx:id="btnMaxCAR" text="+" disable="true"/></HBox></VBox>
+        <Label fx:id="lblPontos" text="Pontos restantes: 27" styleClass="preview"/>
+    </HBox>
+
+    <Button fx:id="btnRolar" text="Gerar/Rolar Atributos" styleClass="botao-secundario"/>
+    <Label fx:id="lblPreview" text="Preview aparecerá aqui" styleClass="preview"/>
+    <Button fx:id="btnSalvar" text="Salvar Herói" styleClass="botao-principal"/>
+</VBox>
